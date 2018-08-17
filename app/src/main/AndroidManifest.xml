@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".EasyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,6 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.OnLineActivity"/>
+        <activity android:name=".activity.SubmitActivity"/>
+        <activity android:name=".activity.HistoryActivity"/>
+        <activity android:name=".activity.CreateActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity android:name=".activity.OnLineDetailsActivity"/>
+        <activity android:name=".activity.SubmitAuditDetailsActivity"/>
+        <activity android:name=".activity.SubmitPassDetailsActivity"/>
+        <activity android:name=".activity.HistoryDetailsActivity"/>
+        <activity android:name=".activity.ActionEditActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

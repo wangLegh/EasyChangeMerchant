@@ -17,4 +17,32 @@
         <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
     </style>
+
+    <!--主页面底部tab的style-->
+    <style name="bottom_tab_style">
+        <item name="android:button">@null</item>
+        <item name="android:background">@color/transparent</item><!--不加这一行的话点击会有水波纹效果-->
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/tab_text_selector</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <!--loading网络加载中的-->
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- //设置背景 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- //去掉边框 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- //设置半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- //设置无标题 -->
+        <item name="android:windowFullscreen">false</item>
+        <!-- //设置全屏 -->
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>

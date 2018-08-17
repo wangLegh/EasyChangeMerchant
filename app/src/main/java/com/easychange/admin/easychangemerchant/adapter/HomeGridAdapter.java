@@ -56,7 +56,7 @@ public class HomeGridAdapter extends BaseAdapter {
         }
 
         vh.title.setText(lists.get(position).title);
-        Glide.with(context).load(lists.get(position).icon).into(vh.icon);
+        vh.icon.setImageDrawable(context.getResources().getDrawable(lists.get(position).icon));
 
         return convertView;
     }

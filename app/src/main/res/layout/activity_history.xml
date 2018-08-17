@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<include layout="@layout/header_view"/>
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:text="起始时间："
+        android:textColor="#333"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/start_time_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/more" />
+
+    <TextView
+        android:id="@+id/act_history_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/start_time_more"
+        android:text="2018.8.10"
+        android:textColor="#999"
+        android:textSize="14sp" />
+</RelativeLayout>
+
+<com.easychange.admin.easychangemerchant.views.WanRecyclerView
+    android:id="@+id/act_submit_recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+</LinearLayout>

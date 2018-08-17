@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/dialog_create_time_layout"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/dialog_create_time_rbAll"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:button="@null"
+                android:gravity="center"
+                android:text="全部"
+                android:textColor="@color/select_tab_create_time"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#ededed" />
+
+            <RadioButton
+                android:id="@+id/dialog_create_time_rbWork"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:button="@null"
+                android:gravity="center"
+                android:text="工作日"
+                android:textColor="@color/select_tab_create_time"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#ededed" />
+
+            <RadioButton
+                android:id="@+id/dialog_create_time_rbRest"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:button="@null"
+                android:gravity="center"
+                android:text="休息日"
+                android:textColor="@color/select_tab_create_time"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:clickable="true"/>
+
+        <Button
+            android:id="@+id/dialog_create_time_submit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

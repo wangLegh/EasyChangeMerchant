@@ -6,14 +6,8 @@
 
     <include layout="@layout/header_view"/>
 
-    <GridView
-        android:id="@+id/frag_gridView"
+    <com.easychange.admin.easychangemerchant.views.WanRecyclerView
+        android:id="@+id/act_onLine_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="9dp"
-        android:verticalSpacing="9dp"
-        android:numColumns="2"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="13dp"
-        android:layout_marginLeft="13dp"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>
