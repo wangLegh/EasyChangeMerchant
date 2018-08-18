@@ -50,6 +50,9 @@ public class MineFragment extends BaseFragment {
         return view;
     }
 
+
+
+
     @OnClick({R.id.img_mine_header, R.id.layout_mine_address, R.id.layout_mine_phone, R.id.layout_mine_message, R.id.layout_mine_tanjifen, R.id.layout_mine_yihuanbi, R.id.layout_mine_erweima, R.id.layout_mine_about_us})
     public void onClick(View view) {
         switch (view.getId()) {
