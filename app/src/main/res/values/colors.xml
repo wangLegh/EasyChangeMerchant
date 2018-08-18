@@ -11,4 +11,5 @@
     <color name="tab_text_selected_color">#038eff</color>
     <color name="tab_text_normal_color">#cccccc</color>
     <color name="transparent">#00000000</color>
+    <color name="def_bg">#ededed</color>
 </resources>

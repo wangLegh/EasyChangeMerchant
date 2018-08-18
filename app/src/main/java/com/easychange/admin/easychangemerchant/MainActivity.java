@@ -34,10 +34,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.act_main_vp);
-        rbAction = findViewById(R.id.act_main_action);
-        rbPay = findViewById(R.id.act_main_pay);
-        rbMine = findViewById(R.id.act_main_mine);
+        viewPager = (ViewPager) findViewById(R.id.act_main_vp);
+        rbAction = (RadioButton) findViewById(R.id.act_main_action);
+        rbPay = (RadioButton) findViewById(R.id.act_main_pay);
+        rbMine = (RadioButton) findViewById(R.id.act_main_mine);
 
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());

@@ -1,6 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/def_bg"
+    >
+<ScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:background="@color/colorGray"
+            android:layout_width="match_parent"
+            android:layout_height="210dip">
 
-</android.support.constraint.ConstraintLayout>
+            <com.easychange.admin.easychangemerchant.views.CircleImageView
+                android:id="@+id/img_mine_header"
+                android:layout_centerInParent="true"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:src="@drawable/ic_launcher_background" />
+            <TextView
+                android:id="@+id/tv_mine_name"
+                android:layout_marginTop="10dip"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/img_mine_header"
+                android:textSize="14dip"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商家名称"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="8dip"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/tv_mine_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/xiaoxi3"
+                    android:textSize="14dip"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12345678901"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/layout_mine_address"
+            android:background="@color/white"
+            android:layout_marginTop="8dip"
+            android:layout_width="match_parent"
+            android:layout_height="50dip">
+            <TextView
+                android:id="@+id/tv_mine_address"
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical"
+                android:text="商家地址信息展示"
+                android:paddingLeft="15dip"
+                android:drawableLeft="@drawable/weizhi3x"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="8dip"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/layout_mine_phone"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="45dip">
+            <TextView
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical"
+                android:text="更换手机"
+                android:paddingLeft="15dip"
+                android:drawableLeft="@drawable/phone3x"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:layout_margin="15dip"
+                android:layout_gravity="center"
+                android:src="@drawable/right3x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+            <View
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="15dip"
+                android:background="@color/def_bg"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:id="@+id/layout_mine_message"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dip">
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:gravity="center_vertical"
+                    android:text="我的消息"
+                    android:paddingLeft="15dip"
+                    android:drawableLeft="@drawable/xiaoxi3"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_margin="15dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/right3x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="15dip"
+                android:background="@color/def_bg"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:id="@+id/layout_mine_tanjifen"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dip">
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:gravity="center_vertical"
+                    android:text="碳积分"
+                    android:paddingLeft="15dip"
+                    android:drawableLeft="@drawable/tanjifen3x"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_margin="15dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/right3x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="15dip"
+                android:background="@color/def_bg"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:id="@+id/layout_mine_yihuanbi"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dip">
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:gravity="center_vertical"
+                    android:text="易换币"
+                    android:paddingLeft="15dip"
+                    android:drawableLeft="@drawable/yihuanbi3x"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_margin="15dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/right3x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="15dip"
+                android:background="@color/def_bg"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:id="@+id/layout_mine_erweima"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dip">
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:gravity="center_vertical"
+                    android:text="商家二维码"
+                    android:paddingLeft="15dip"
+                    android:drawableLeft="@drawable/erweima3x"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_margin="15dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/right3x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="15dip"
+                android:background="@color/def_bg"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:id="@+id/layout_mine_about_us"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dip">
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:gravity="center_vertical"
+                    android:text="关于我们"
+                    android:paddingLeft="15dip"
+                    android:drawableLeft="@drawable/aboutus3x"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_margin="15dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/right3x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="15dip"
+                android:background="@color/def_bg"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+</LinearLayout>
