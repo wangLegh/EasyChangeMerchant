@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="选择期限"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F0F0F0"/>
+    <!--此部分需要完整复制过去，删减或者更改ID会导致初始化找不到内容而报空-->
+    <LinearLayout
+        android:id="@+id/optionspicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F8F7F7"
+        android:orientation="horizontal">
+
+        <com.bigkoo.pickerview.lib.WheelView
+            android:id="@+id/options1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.bigkoo.pickerview.lib.WheelView
+            android:id="@+id/options2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.bigkoo.pickerview.lib.WheelView
+            android:id="@+id/options3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="取消"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+</LinearLayout>

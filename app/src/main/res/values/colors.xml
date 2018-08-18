@@ -12,4 +12,8 @@
     <color name="tab_text_normal_color">#cccccc</color>
     <color name="transparent">#00000000</color>
     <color name="def_bg">#ededed</color>
+    <color name="layout_bg">#ECEDEC</color>
+    <color name="textcolorgray">#999999</color>
+    <color name="textcolor">#666666</color>
+    <color name="text_black">#444444</color>
 </resources>
