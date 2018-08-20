@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.bean.ActionBean;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class OnLineAdapter extends RecyclerView.Adapter {
 
-    private List<String> datas;
+    private List<ActionBean> datas;
 
     private Context context;
 
@@ -27,7 +29,7 @@ public class OnLineAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public OnLineAdapter(List<String> datas, Context context) {
+    public OnLineAdapter(List<ActionBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
@@ -40,13 +42,25 @@ public class OnLineAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            viewHolder.tvActionName.setText("活动名称：" + datas.get(position).getActivityTitle());
+
+            viewHolder.tvActionTime.setText(format.format(datas.get(position).getBeginTime()) + "-" + format.format(datas.get(position).getEndTime()));
+
+            viewHolder.tvActionLimit.setText("满" + datas.get(position).getFull() + "减" + datas.get(position).getSub());
+
+            viewHolder.tvSuccessNum.setText(datas.get(position).getOrderQuantity() + "单");
+
+            viewHolder.tvCoinNum.setText(datas.get(position).getGainCurrency() + "易换币");
+
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClickListener();
+                    onItemClickListener.onItemClickListener(datas.get(position), position);
                 }
             });
         }
@@ -54,7 +68,7 @@ public class OnLineAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,6 +93,6 @@ public class OnLineAdapter extends RecyclerView.Adapter {
     }
 
     public interface OnItemClickListener{
-        void onItemClickListener();
+        void onItemClickListener(ActionBean actionBean, int position);
     }
 }

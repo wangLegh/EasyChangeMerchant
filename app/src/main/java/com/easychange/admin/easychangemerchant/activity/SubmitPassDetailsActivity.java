@@ -9,15 +9,22 @@ import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.ActionBean;
+
+import java.text.SimpleDateFormat;
 
 /**
  * admin  2018/8/17 wan
  */
 public class SubmitPassDetailsActivity extends BaseActivity {
+    private ActionBean actionBean;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_pass_details);
+
+        actionBean = getIntent().getParcelableExtra("action");
 
         TextView title = findViewById(R.id.view_header_title);
         title.setText("未通过活动详情");
@@ -36,6 +43,31 @@ public class SubmitPassDetailsActivity extends BaseActivity {
         tvLimitName = findViewById(R.id.act_submit_pass_limitName);
         tvActionLimit = findViewById(R.id.act_submit_pass_actionLimit);
         tvCause = findViewById(R.id.act_submit_pass_cause);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        tvActionName.setText("活动名称：" + actionBean.getActivityTitle());
+
+        tvActionTime.setText(format.format(actionBean.getBeginTime()) + "-" + format.format(actionBean.getEndTime()));
+        switch (actionBean.getActivityTime()) {
+            case "0":
+                tvCouponTime.setText("工作日 每天" + actionBean.getTimeLimit());
+                break;
+            case "1":
+                tvCouponTime.setText("休息日 每天" + actionBean.getTimeLimit());
+                break;
+            case "2":
+                tvCouponTime.setText("全部 每天" + actionBean.getTimeLimit());
+                break;
+        }
+
+        tvCouponNum.setText(actionBean.getCount() + "");
+
+        tvActionLimit.setText("满" + actionBean.getFull() + "减" + actionBean.getSub());
+
+        tvCouponPrice.setText(actionBean.getPrice() + "易换币");
+
+        tvCause.setText(actionBean.getContent());
     }
 
     private TextView tvActionName;
@@ -47,8 +79,9 @@ public class SubmitPassDetailsActivity extends BaseActivity {
     private TextView tvActionLimit;
     private TextView tvCause;
 
-    public static void invoke(Context context){
+    public static void invoke(Context context, ActionBean actionBean){
         Intent intent = new Intent(context, SubmitPassDetailsActivity.class);
+        intent.putExtra("action", actionBean);
         context.startActivity(intent);
     }
 }

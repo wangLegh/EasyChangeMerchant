@@ -38,7 +38,6 @@ android:orientation="vertical">
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/start_time_more"
-        android:text="2018.8.10"
         android:textColor="#999"
         android:textSize="14sp" />
 </RelativeLayout>

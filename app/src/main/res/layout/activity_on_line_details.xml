@@ -55,7 +55,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
 
@@ -82,7 +81,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="满999减666"
                 />
         </LinearLayout>
 
@@ -109,7 +107,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="20单"
                 />
         </LinearLayout>
 
@@ -134,7 +131,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
     </LinearLayout>

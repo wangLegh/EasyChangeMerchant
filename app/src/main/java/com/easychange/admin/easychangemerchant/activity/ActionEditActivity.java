@@ -5,13 +5,21 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.ActionBean;
+import com.easychange.admin.easychangemerchant.event.EventUtils;
+import com.easychange.admin.easychangemerchant.p.ActionEditPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,11 +28,15 @@ import java.util.Date;
 /**
  * admin  2018/8/16 wan
  */
-public class ActionEditActivity extends BaseActivity implements View.OnClickListener {
+public class ActionEditActivity extends BaseActivity implements View.OnClickListener, ActionEditPresenter.ActionEditCallBack {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_action);
+
+        actionBean = getIntent().getParcelableExtra("action");
+
+        presenter = new ActionEditPresenter(this, this);
 
         TextView title = findViewById(R.id.view_header_title);
         title.setText("编辑活动详情");
@@ -38,22 +50,27 @@ public class ActionEditActivity extends BaseActivity implements View.OnClickList
         tvStopTime = findViewById(R.id.act_edit_action_stopTime);
         tvStartTime = findViewById(R.id.act_edit_action_startTime);
         etCompanyName = findViewById(R.id.act_edit_action_companyName);
-        etCoinNum = findViewById(R.id.act_edit_action_coinNum);
-        etCouponNum = findViewById(R.id.act_edit_action_couponNum);
+        tvCoinNum = findViewById(R.id.act_edit_action_coinNum);
+        tvSuccessNum = findViewById(R.id.act_edit_action_couponNum);
         submit = findViewById(R.id.act_edit_action_submit);
 
         tvStopTime.setOnClickListener(this);
         tvStartTime.setOnClickListener(this);
         submit.setOnClickListener(this);
 
+        tvSuccessNum.setText(actionBean.getOrderQuantity() + "单");
+
+        tvCoinNum.setText(actionBean.getGainCurrency() + "易换币");
     }
 
     private TextView tvStopTime;
     private TextView tvStartTime;
     private EditText etCompanyName;
-    private EditText etCoinNum;
-    private EditText etCouponNum;
+    private TextView tvCoinNum;
+    private TextView tvSuccessNum;
     private TextView submit;
+    private ActionBean actionBean;
+    private ActionEditPresenter presenter;
 
     private void showStartTimeSelect(){
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
@@ -105,8 +122,9 @@ public class ActionEditActivity extends BaseActivity implements View.OnClickList
         pvTime.show();
     }
 
-    public static void invoke(Context context){
+    public static void invoke(Context context, ActionBean actionBean){
         Intent intent = new Intent(context, ActionEditActivity.class);
+        intent.putExtra("action", actionBean);
         context.startActivity(intent);
     }
 
@@ -114,14 +132,48 @@ public class ActionEditActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.act_edit_action_startTime:
+                ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                        .hideSoftInputFromWindow(getCurrentFocus()
+                                        .getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
+
                 showStartTimeSelect();
                 break;
             case R.id.act_edit_action_stopTime:
+                ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                        .hideSoftInputFromWindow(getCurrentFocus()
+                                        .getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
+
                 showStopTimeSelect();
                 break;
             case R.id.act_edit_action_submit:
+                if (TextUtils.isEmpty(etCompanyName.getText().toString().trim())) {
+                    Toast.makeText(this, "请输入活动名称", Toast.LENGTH_SHORT).show();
 
+                } else if (TextUtils.equals(tvStartTime.getText().toString(), "请选择")) {
+                    Toast.makeText(this, "请选择起始时间", Toast.LENGTH_SHORT).show();
+
+                } else if (TextUtils.equals(tvStopTime.getText().toString(), "请选择")) {
+                    Toast.makeText(this, "请选择结束时间", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    presenter.setEditActionRequest(actionBean.getId(), etCompanyName.getText().toString(),
+                            tvStartTime.getText().toString().replace(".", "-"), tvStopTime.getText().toString().replace(".", "-"));
+                }
                 break;
         }
+    }
+
+    @Override
+    public void editActionRequest() {
+        Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().post(new EventUtils(EventUtils.TYPE_ON_LINE_REFRESH));
+        finish();
+    }
+
+    @Override
+    public void editActionRequestFail() {
+        Toast.makeText(this, "修改失败", Toast.LENGTH_SHORT).show();
     }
 }

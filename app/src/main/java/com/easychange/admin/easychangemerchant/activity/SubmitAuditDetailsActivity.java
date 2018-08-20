@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.base.BaseDialog;
+import com.easychange.admin.easychangemerchant.bean.ActionBean;
+
+import java.text.SimpleDateFormat;
 
 /**
  * admin  2018/8/17 wan
@@ -21,10 +24,14 @@ public class SubmitAuditDetailsActivity extends BaseActivity {
     private TextView btnPass;
     private TextView btnNoPass;
 
+    private ActionBean actionBean;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_audit_details);
+
+        actionBean = getIntent().getParcelableExtra("action");
 
         TextView title = findViewById(R.id.view_header_title);
         title.setText("已提交活动详情");
@@ -43,6 +50,29 @@ public class SubmitAuditDetailsActivity extends BaseActivity {
         tvCouponTime = findViewById(R.id.act_submit_audit_couponTime);
         tvCouponPrice = findViewById(R.id.act_submit_audit_couponPrice);
         tvCouponNum = findViewById(R.id.act_submit_audit_couponNum);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        tvActionName.setText("活动名称：" + actionBean.getActivityTitle());
+
+        tvActionTime.setText(format.format(actionBean.getBeginTime()) + "-" + format.format(actionBean.getEndTime()));
+        switch (actionBean.getActivityTime()) {
+            case "0":
+                tvCouponTime.setText("工作日 每天" + actionBean.getTimeLimit());
+                break;
+            case "1":
+                tvCouponTime.setText("休息日 每天" + actionBean.getTimeLimit());
+                break;
+            case "2":
+                tvCouponTime.setText("全部 每天" + actionBean.getTimeLimit());
+                break;
+        }
+
+        tvCouponNum.setText(actionBean.getCount() + "");
+
+        tvActionLimit.setText("满" + actionBean.getFull() + "减" + actionBean.getSub());
+
+        tvCouponPrice.setText(actionBean.getPrice() + "易换币");
 
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,8 +127,9 @@ public class SubmitAuditDetailsActivity extends BaseActivity {
         dialog.show();
     }
 
-    public static void invoke(Context context){
+    public static void invoke(Context context, ActionBean actionBean){
         Intent intent = new Intent(context, SubmitAuditDetailsActivity.class);
+        intent.putExtra("action", actionBean);
         context.startActivity(intent);
     }
 }

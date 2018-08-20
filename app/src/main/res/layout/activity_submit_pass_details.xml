@@ -19,7 +19,7 @@
             android:id="@+id/act_submit_pass_actionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="活动名称：618狂欢日"
+            android:text="活动名称："
             android:textColor="#333"
             android:padding="10dp"
             android:textSize="16sp"/>
@@ -54,7 +54,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
 
@@ -81,7 +80,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="满999减666"
                 />
         </LinearLayout>
 
@@ -108,7 +106,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="20单"
                 />
         </LinearLayout>
 
@@ -133,7 +130,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
 
@@ -150,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="#333"
-                android:text="抵限活动："
+                android:text="满减活动："
                 />
 
             <TextView
@@ -160,7 +156,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
 
@@ -185,7 +180,6 @@
                 android:layout_weight="1"
                 android:textColor="#ffbb37"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
     </LinearLayout>

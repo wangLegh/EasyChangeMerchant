@@ -28,7 +28,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
-                    android:text="公司名称："
+                    android:text="活动名称："
                     android:textColor="#333"
                     android:textSize="15sp" />
 
@@ -47,7 +47,7 @@
                     android:layout_marginRight="5dp"
                     android:background="@null"
                     android:gravity="left|top"
-                    android:hint="请输入公司名称"
+                    android:hint="请输入活动名称"
                     android:padding="10dp"
                     android:textColor="#333"
                     android:textSize="15sp" />
@@ -98,7 +98,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/start_time_more"
                         android:gravity="center_vertical"
-                        android:text="2018.8.10"
+                        android:text="请选择"
                         android:textColor="#999"
                         android:textSize="14sp" />
                 </RelativeLayout>
@@ -139,7 +139,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/stop_time_more"
                         android:gravity="center_vertical"
-                        android:text="2018.8.10"
+                        android:text="请选择"
                         android:textColor="#999"
                         android:textSize="14sp" />
                 </RelativeLayout>
@@ -166,7 +166,7 @@
                         android:textColor="#333"
                         android:textSize="15sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/act_edit_action_couponNum"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -176,7 +176,6 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="right|center_vertical"
-                        android:hint="请输入优惠卷的发布数量"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="#333"
@@ -204,7 +203,7 @@
                         android:textColor="#333"
                         android:textSize="15sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/act_edit_action_coinNum"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -214,7 +213,6 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="right|center_vertical"
-                        android:hint="请输入易换币数量"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="#333"

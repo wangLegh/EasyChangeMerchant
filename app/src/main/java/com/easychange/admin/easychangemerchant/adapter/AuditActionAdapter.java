@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.bean.ActionBean;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public class AuditActionAdapter extends RecyclerView.Adapter {
 
     private Context context;
 
-    private List<String> datas;
+    private List<ActionBean> datas;
 
     private OnItemClickListener onItemClickListener;
 
@@ -27,7 +29,7 @@ public class AuditActionAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public AuditActionAdapter(Context context, List<String> datas) {
+    public AuditActionAdapter(Context context, List<ActionBean> datas) {
         this.context = context;
         this.datas = datas;
     }
@@ -40,14 +42,33 @@ public class AuditActionAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            viewHolder.tvActionName.setText("活动名称：" + datas.get(position).getActivityTitle());
+
+            viewHolder.tvActionTime.setText(format.format(datas.get(position).getBeginTime()) + "-" + format.format(datas.get(position).getEndTime()));
+            switch (datas.get(position).getActivityTime()) {
+                case "0":
+                    viewHolder.tvCouponTime.setText("工作日 每天" + datas.get(position).getTimeLimit());
+                    break;
+                case "1":
+                    viewHolder.tvCouponTime.setText("休息日 每天" + datas.get(position).getTimeLimit());
+                    break;
+                case "2":
+                    viewHolder.tvCouponTime.setText("全部 每天" + datas.get(position).getTimeLimit());
+                    break;
+            }
+
+            viewHolder.tvCouponNum.setText(datas.get(position).getCount() + "");
 
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClickListener();
+                    onItemClickListener.onItemClickListener(datas.get(position), position);
                 }
             });
         }
@@ -55,7 +76,7 @@ public class AuditActionAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -78,6 +99,6 @@ public class AuditActionAdapter extends RecyclerView.Adapter {
     }
 
     public interface OnItemClickListener{
-        void onItemClickListener();
+        void onItemClickListener(ActionBean actionBean, int position);
     }
 }

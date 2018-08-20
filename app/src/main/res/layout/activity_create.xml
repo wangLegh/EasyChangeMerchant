@@ -28,7 +28,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
-                    android:text="公司名称："
+                    android:text="活动名称："
                     android:textColor="#333"
                     android:textSize="15sp" />
 
@@ -47,7 +47,7 @@
                     android:layout_marginRight="5dp"
                     android:background="@null"
                     android:gravity="left|top"
-                    android:hint="请输入公司名称"
+                    android:hint="请输入活动名称"
                     android:padding="10dp"
                     android:textColor="#333"
                     android:textSize="15sp" />
@@ -89,7 +89,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/start_time_more"
                         android:gravity="center_vertical"
-                        android:text="2018.8.10"
+                        android:text="请选择"
                         android:textColor="#999"
                         android:textSize="14sp" />
                 </RelativeLayout>
@@ -130,7 +130,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/stop_time_more"
                         android:gravity="center_vertical"
-                        android:text="2018.8.10"
+                        android:text="请选择"
                         android:textColor="#999"
                         android:textSize="14sp" />
                 </RelativeLayout>
@@ -314,15 +314,37 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="center_vertical"
-                    android:text="活动满减设置："
-                    android:textColor="#333"
-                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:text="活动满减设置："
+                        android:textColor="#333"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/act_create_action_action"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="例如：满100减20"
+                        android:singleLine="true"
+                        android:textColor="#333"
+                        android:textSize="15sp"
+                        android:gravity="right"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="15dp"
+                        />
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -331,19 +353,76 @@
                     android:layout_marginRight="15dp"
                     android:background="#ededed" />
 
-                <EditText
-                    android:id="@+id/act_create_action_action"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@null"
-                    android:hint="例如：满100减20"
-                    android:padding="10dp"
-                    android:singleLine="true"
-                    android:textColor="#333"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/btn_stoke_bg"
+                        android:layout_marginRight="40dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/text_max_bg"
+                            android:text="满"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:padding="5dp"
+                            />
+
+                        <EditText
+                            android:id="@+id/act_create_action_input_max"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="请输入数字"
+                            android:inputType="number"
+                            android:textSize="14sp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@null"
+                            android:textColor="#333333"
+                            android:padding="5dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/btn_stoke_bg"
+                        android:layout_marginRight="40dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/text_min_bg"
+                            android:text="减"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:padding="5dp"
+                            />
+
+                        <EditText
+                            android:id="@+id/act_create_action_input_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="请输入数字"
+                            android:inputType="number"
+                            android:textSize="14sp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@null"
+                            android:textColor="#333333"
+                            android:padding="5dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <TextView

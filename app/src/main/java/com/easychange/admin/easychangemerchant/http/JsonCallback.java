@@ -3,6 +3,7 @@ package com.easychange.admin.easychangemerchant.http;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.EasyApplication;
 import com.lzy.okgo.callback.AbsCallback;
@@ -86,6 +87,10 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    EasyApplication.getGloableContext().startActivity(intent);
 
+                    break;
+                case 212:
+                case 500:
+                    Toast.makeText(EasyApplication.getInstance(), ((HttpException) response.getException()).getErrorBean().msg, Toast.LENGTH_SHORT).show();
                     break;
             }
 

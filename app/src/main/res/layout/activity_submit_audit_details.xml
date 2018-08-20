@@ -20,7 +20,7 @@
             android:id="@+id/act_submit_audit_actionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="活动名称：618狂欢日"
+            android:text="活动名称："
             android:textColor="#333"
             android:padding="10dp"
             android:textSize="16sp"/>
@@ -55,7 +55,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
 
@@ -82,7 +81,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="满999减666"
                 />
         </LinearLayout>
 
@@ -109,7 +107,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="20单"
                 />
         </LinearLayout>
 
@@ -134,7 +131,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
 
@@ -160,7 +156,6 @@
                 android:layout_weight="1"
                 android:textColor="#999"
                 android:textSize="14sp"
-                android:text="2018-6-18-2018-6-28"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -168,7 +163,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/act_submit_audit_no_pass_btn"

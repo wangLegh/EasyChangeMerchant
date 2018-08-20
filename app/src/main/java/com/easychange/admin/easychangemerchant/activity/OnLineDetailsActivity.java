@@ -11,7 +11,12 @@ import android.widget.Toast;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.bean.ActionBean;
+import com.easychange.admin.easychangemerchant.event.EventUtils;
 import com.easychange.admin.easychangemerchant.p.SoldOutPresenter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 
@@ -48,7 +53,7 @@ public class OnLineDetailsActivity extends BaseActivity implements SoldOutPresen
         editTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActionEditActivity.invoke(OnLineDetailsActivity.this);
+                ActionEditActivity.invoke(OnLineDetailsActivity.this, actionBean);
             }
         });
 
@@ -77,6 +82,8 @@ public class OnLineDetailsActivity extends BaseActivity implements SoldOutPresen
                 presenter.setSoldOutRequest(actionBean.getId() + "");
             }
         });
+
+        EventBus.getDefault().register(this);
     }
 
     private TextView tvActionName;
@@ -95,10 +102,27 @@ public class OnLineDetailsActivity extends BaseActivity implements SoldOutPresen
     @Override
     public void requestSoldOutSuccess() {
         Toast.makeText(this,"操作成功", Toast.LENGTH_SHORT).show();
+        finish();
+        EventBus.getDefault().post(new EventUtils(EventUtils.TYPE_REFRESH_ACTION_LIST));
     }
 
     @Override
     public void requestSoldOutFail() {
         Toast.makeText(this,"操作失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRecevierEvent(EventUtils event) {
+        switch (event.getType()) {
+            case EventUtils.TYPE_ON_LINE_REFRESH:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

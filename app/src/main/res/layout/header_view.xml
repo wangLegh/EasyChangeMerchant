@@ -20,9 +20,11 @@
     <TextView
         android:id="@+id/view_header_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:textSize="18sp"
+        android:singleLine="true"
+        android:gravity="center_vertical"
         android:textColor="@android:color/white"/>
 
     <TextView
@@ -36,5 +38,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
         android:gravity="center_vertical"
+        android:textSize="16sp"
         android:visibility="gone"/>
 </RelativeLayout>
