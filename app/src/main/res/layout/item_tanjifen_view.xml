@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="45dip">
+        <TextView
+            android:id="@+id/tv_message_content"
+            android:textColor="#444"
+            android:text="现有积分="
+            android:paddingLeft="15dip"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_tanjifen_duihuan"
+            android:textColor="#999"
+            android:paddingRight="15dip"
+            android:text="10瓶子"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_marginRight="15dip"
+        android:layout_marginLeft="15dip"
+        android:background="@color/def_bg"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        />
+</LinearLayout>

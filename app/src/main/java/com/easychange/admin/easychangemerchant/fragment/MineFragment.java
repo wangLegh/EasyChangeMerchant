@@ -9,7 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.activity.AboutUsActivity;
 import com.easychange.admin.easychangemerchant.activity.ChangePhoneActivitty;
+import com.easychange.admin.easychangemerchant.activity.MessageActivitty;
+import com.easychange.admin.easychangemerchant.activity.TanjifenActivity;
+import com.easychange.admin.easychangemerchant.activity.YihuanbiActivity;
 import com.easychange.admin.easychangemerchant.base.BaseFragment;
 import com.easychange.admin.easychangemerchant.views.CircleImageView;
 
@@ -64,14 +68,18 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(mContext,ChangePhoneActivitty.class));
                 break;
             case R.id.layout_mine_message://我的消息
+                startActivity(new Intent(mContext,MessageActivitty.class));
                 break;
             case R.id.layout_mine_tanjifen://碳积分
+                startActivity(new Intent(mContext,TanjifenActivity.class));
                 break;
             case R.id.layout_mine_yihuanbi://易换币
+                startActivity(new Intent(mContext,YihuanbiActivity.class));
                 break;
             case R.id.layout_mine_erweima://商家二维码
                 break;
             case R.id.layout_mine_about_us://关于我们
+                startActivity(new Intent(mContext,AboutUsActivity.class));
                 break;
         }
     }

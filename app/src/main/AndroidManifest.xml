@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.easychange.admin.easychangemerchant"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.easychange.admin.easychangemerchant">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -27,9 +29,9 @@
         tools:replace="android:icon, android:label,android:theme">
         <activity android:name=".login.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.OnLineActivity" />
@@ -46,25 +48,34 @@
             android:name=".activity.ActionEditActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".activity.ChangePhoneActivitty" />
-        <activity android:name=".activity.SureChangePhoneActivity"></activity>
-        <activity android:name=".MainActivity"
-                  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.OnLineActivity"/>
-        <activity android:name=".activity.SubmitActivity"/>
-        <activity android:name=".activity.HistoryActivity"/>
+        <activity android:name=".activity.SureChangePhoneActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.OnLineActivity" />
+        <activity android:name=".activity.SubmitActivity" />
+        <activity android:name=".activity.HistoryActivity" />
         <activity
             android:name=".activity.CreateActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <activity android:name=".activity.OnLineDetailsActivity"/>
-        <activity android:name=".activity.SubmitAuditDetailsActivity"/>
-        <activity android:name=".activity.SubmitPassDetailsActivity"/>
-        <activity android:name=".activity.HistoryDetailsActivity"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity android:name=".activity.OnLineDetailsActivity" />
+        <activity android:name=".activity.SubmitAuditDetailsActivity" />
+        <activity android:name=".activity.SubmitPassDetailsActivity" />
+        <activity android:name=".activity.HistoryDetailsActivity" />
         <activity
             android:name=".activity.ActionEditActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <activity android:name=".login.RegistActivity"/>
-        <activity android:name=".login.ForgetPwdActivity"/>
-        <activity android:name=".fragment.MyZxingActivity"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity android:name=".login.RegistActivity" />
+        <activity android:name=".login.ForgetPwdActivity" />
+        <activity android:name=".fragment.MyZxingActivity" />
+        <activity android:name=".activity.MessageActivitty" />
+        <activity android:name=".activity.MessageDetailsActivity" />
+        <activity android:name=".activity.TanjifenActivity" />
+        <activity android:name=".activity.MingxiActivity" />
+        <activity android:name=".activity.YihuanbiActivity" />
+        <activity android:name=".activity.ShenqingActivity" />
+        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.LiuyanActivity"></activity>
     </application>
 
 </manifest>
