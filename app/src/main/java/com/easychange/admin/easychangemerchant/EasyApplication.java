@@ -140,4 +140,12 @@ public class EasyApplication extends Application {
         }
         return false;
     }
+
+    public static String getUserToken(){
+        return "NwzEJXRrhYrWgg0hquAqqg==";
+    }
+
+    public static String getUserId(){
+        return "1";
+    }
 }
