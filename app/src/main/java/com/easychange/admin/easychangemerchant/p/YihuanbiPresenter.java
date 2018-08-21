@@ -2,6 +2,7 @@ package com.easychange.admin.easychangemerchant.p;
 
 import android.app.Activity;
 
+import com.easychange.admin.easychangemerchant.EasyApplication;
 import com.easychange.admin.easychangemerchant.bean.YihuanbiBean;
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
@@ -21,9 +22,9 @@ public class YihuanbiPresenter {
         this.callBack = callBack;
     }
     //易换币列表记录
-    public void YihuanbiRequest(String id,int pageNum,int pageSize){
+    public void YihuanbiRequest(int pageNum,int pageSize){
         new HttpManager<ResponseBean< YihuanbiBean>>("/merchantApp/applicationRecord", this)
-                .addParams("id", id)
+                .addParams("id", EasyApplication.getUserId())
                 .addParams("pageNum", pageNum)
                 .addParams("pageSize", pageSize)
                 .getRequets(new DialogCallback<ResponseBean<YihuanbiBean>>(activity) {
@@ -35,18 +36,18 @@ public class YihuanbiPresenter {
                     @Override
                     public void onError(Response<ResponseBean<YihuanbiBean>> response) {
                         super.onError(response);
-                        callBack.requestFail(response.message());
+                        callBack.requestFail(response.getException().getMessage());
                     }
                 });
 
     }
     //易换币申请
-    public void ApplyRequest(String shopId,int count,int year){
+    public void ApplyRequest(String count,String year){
         new HttpManager<ResponseBean>("/merchantApp/applyMoney", this)
-                .addParams("id", shopId)
-                .addParams("pageNum", count)
-                .addParams("pageSize", year)
-                .getRequets(new DialogCallback<ResponseBean>(activity) {
+                .addParams("shopId", EasyApplication.getUserId())
+                .addParams("count", count)
+                .addParams("year", year)
+                .postRequest(new DialogCallback<ResponseBean>(activity) {
                     @Override
                     public void onSuccess(Response<ResponseBean> response) {
                         callBack.requestApplySuccess();
@@ -55,7 +56,7 @@ public class YihuanbiPresenter {
                     @Override
                     public void onError(Response<ResponseBean> response) {
                         super.onError(response);
-                        callBack.requestFail(response.message());
+                        callBack.requestFail(response.getException().getMessage());
                     }
                 });
 

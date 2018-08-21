@@ -1,6 +1,7 @@
 package com.easychange.admin.easychangemerchant.bean;
 
-public class ApplyBean {
+public class SuccessBean {
+
     /**
      * msg : 申请成功，等待审核！
      * code : 200

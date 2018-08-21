@@ -1,16 +1,21 @@
 package com.easychange.admin.easychangemerchant.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.YihuanbiBean;
+import com.easychange.admin.easychangemerchant.p.YihuanbiPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShenqingActivity extends BaseActivity {
+public class ShenqingActivity extends BaseActivity implements YihuanbiPresenter.YihuanbiCallBack {
 
     @BindView(R.id.view_header_back)
     FrameLayout viewHeaderBack;
@@ -37,13 +42,17 @@ public class ShenqingActivity extends BaseActivity {
     TextView tvShenqing;
     private OptionsPickerView pvCustomOptions;
     private List<String> timeList;
+    private YihuanbiPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shenqing);
         ButterKnife.bind(this);
+        presenter = new YihuanbiPresenter(this, this);
         initData();
     }
+
     private void initData() {
         viewHeaderTitle.setText("易换币");
         timeList = new ArrayList<>();
@@ -57,6 +66,7 @@ public class ShenqingActivity extends BaseActivity {
         timeList.add("8年");
         initCustomOptionPicker(timeList);
     }
+
     @OnClick({R.id.view_header_back, R.id.iv_select_date, R.id.tv_shenqing, R.id.tv_date})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -70,7 +80,11 @@ public class ShenqingActivity extends BaseActivity {
                 pvCustomOptions.show();
                 break;
             case R.id.tv_shenqing:
-
+                if (TextUtils.isEmpty(etFaxingliang.getText().toString())) {
+                    Toast.makeText(mContext, "请输入易换币数量", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                presenter.ApplyRequest( etFaxingliang.getText().toString(), tvDate.getText().toString());
                 break;
         }
     }
@@ -114,4 +128,21 @@ public class ShenqingActivity extends BaseActivity {
         pvCustomOptions.setPicker(data);//添加数据
     }
 
+    @Override
+    public void requestYihuanbiSuccess(YihuanbiBean datas) {
+
+    }
+
+    @Override
+    public void requestFail(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void requestApplySuccess() {
+        Toast.makeText(mContext, "申请成功，待审核", Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        setResult(1, intent);
+        finish();
+    }
 }

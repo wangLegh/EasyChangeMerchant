@@ -48,7 +48,7 @@ public class YihuanbiActivity extends BaseActivity implements YihuanbiAdapter.On
         setContentView(R.layout.activity_yihuanbi);
         ButterKnife.bind(this);
         presenter = new YihuanbiPresenter(this, this);
-        presenter.YihuanbiRequest("1", pageNum, 10);
+        presenter.YihuanbiRequest( pageNum, 10);
 
         initView();
     }
@@ -70,8 +70,19 @@ public class YihuanbiActivity extends BaseActivity implements YihuanbiAdapter.On
                 finish();
                 break;
             case R.id.tv_shenqing:
-                startActivity(new Intent(mContext, ShenqingActivity.class));
+                Intent intent = new Intent(mContext, ShenqingActivity.class);
+                startActivityForResult(intent,0);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0&&resultCode==1){
+            pageNum = 1;
+            mData.clear();
+            presenter.YihuanbiRequest( pageNum, 10);
         }
     }
 
@@ -84,20 +95,20 @@ public class YihuanbiActivity extends BaseActivity implements YihuanbiAdapter.On
     public void onRefresh() {
         pageNum = 1;
         mData.clear();
-        presenter.YihuanbiRequest("1", pageNum, 10);
+        presenter.YihuanbiRequest( pageNum, 10);
     }
 
     @Override
     public void onLoadMore() {
         pageNum++;
-        presenter.YihuanbiRequest("1", pageNum, 10);
+        presenter.YihuanbiRequest( pageNum, 10);
     }
 
     @Override
     public void requestYihuanbiSuccess(YihuanbiBean datas) {
         if (datas != null) {
-            tvFaxingNum.setText(datas.getCirculation()+"");
-            tvShengyuNum.setText(datas.getResidueCurrency()+"");
+            tvFaxingNum.setText(datas.getCirculation() + "");
+            tvShengyuNum.setText(datas.getResidueCurrency() + "");
             mData.addAll(datas.getList());
             yihuanbiRecyclerView.setHasMore(datas.getList().size(), 10);
         } else {
