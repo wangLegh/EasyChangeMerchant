@@ -12,6 +12,7 @@ import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.activity.AboutUsActivity;
 import com.easychange.admin.easychangemerchant.activity.ChangePhoneActivitty;
 import com.easychange.admin.easychangemerchant.activity.MessageActivitty;
+import com.easychange.admin.easychangemerchant.activity.MyCodeActivity;
 import com.easychange.admin.easychangemerchant.activity.TanjifenActivity;
 import com.easychange.admin.easychangemerchant.activity.YihuanbiActivity;
 import com.easychange.admin.easychangemerchant.base.BaseFragment;
@@ -77,6 +78,7 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(mContext,YihuanbiActivity.class));
                 break;
             case R.id.layout_mine_erweima://商家二维码
+                startActivity(new Intent(mContext,MyCodeActivity.class));
                 break;
             case R.id.layout_mine_about_us://关于我们
                 startActivity(new Intent(mContext,AboutUsActivity.class));

@@ -16,15 +16,19 @@ import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseFragment;
+import com.easychange.admin.easychangemerchant.http.BaseResponseBean;
+import com.easychange.admin.easychangemerchant.p.SaoMaPresenter;
+import com.easychange.admin.easychangemerchant.utils.CacheUtils;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-public class BiFragment extends BaseFragment implements View.OnClickListener {
+public class BiFragment extends BaseFragment implements View.OnClickListener, SaoMaPresenter.SaoMaCallBack {
 
     private TextView tv_sao;
     private EditText et_count;
     private static final int REQUEST_CODE_ZXING = 1001;
-    private static final int CODE_FOR_WRITE_PERMISSION = 1002;
+    private static final int CODE_FOR_CAMERA_PERMISSION = 1002;
     private String permission = Manifest.permission.CAMERA;
+    private SaoMaPresenter presenter;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
         tv_sao = view.findViewById(R.id.tv_sao);
         et_count = view.findViewById(R.id.et_count);
         tv_sao.setOnClickListener(this);
+        presenter = new SaoMaPresenter(mActivity, this);
         return view;
     }
 
@@ -63,14 +68,14 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
             startActivityForResult(intent, REQUEST_CODE_ZXING);
         } else {
             //没有权限，向用户请求权限
-            ActivityCompat.requestPermissions(mActivity, new String[]{permission}, CODE_FOR_WRITE_PERMISSION);
+            ActivityCompat.requestPermissions(mActivity, new String[]{permission}, CODE_FOR_CAMERA_PERMISSION);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         //通过requestCode来识别是否同一个请求
-        if (requestCode == CODE_FOR_WRITE_PERMISSION) {
+        if (requestCode == CODE_FOR_CAMERA_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //用户同意，执行操作
                 Intent intent = new Intent(mContext, MyZxingActivity.class);
@@ -98,10 +103,26 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     //                    Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                    try {
+                        int shopId = CacheUtils.get("id");
+                        presenter.getBiSaoData(shopId, Integer.parseInt(result), Integer.parseInt(et_count.getText().toString()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
                 }
             }
         }
+    }
+
+    @Override
+    public void bisao(BaseResponseBean responseBean) {
+
+    }
+
+    @Override
+    public void quansao(BaseResponseBean responseBean) {
+
     }
 }

@@ -1,6 +1,5 @@
 package com.easychange.admin.easychangemerchant.utils;
 
-import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -36,7 +35,7 @@ public class SendSmsTimerUtils extends CountDownTimer {//验证码倒计时的�
      * 第四个参数：点击textview之前的字体颜色
      * 第五个参数：点击textview之后的字体颜色
      */
-    public SendSmsTimerUtils(TextView textView, long millisInFuture, long countDownInterval,
+    private SendSmsTimerUtils(TextView textView, long millisInFuture, long countDownInterval,
                              int inFuture, int downInterval) {
         /*
         注意这个，super的构造器中millisInFuture是总时间，countDownInterval是间隔时间
@@ -51,12 +50,12 @@ public class SendSmsTimerUtils extends CountDownTimer {//验证码倒计时的�
     @Override
     public void onTick(long millisUntilFinished) {
         mTextView.setClickable(false);
-        mTextView.setText(millisUntilFinished / 1000 + "s");
-        mTextView.setTextColor(EasyApplication.getInstance().getResources().getColor(downInterval));
-
+        mTextView.setText(millisUntilFinished / 1000 + "S");
+        int color = EasyApplication.getGloableContext().getResources().getColor(downInterval);
+        mTextView.setTextColor(color);
         SpannableString spannableString = new SpannableString(mTextView.getText().toString());
-        ForegroundColorSpan span = new ForegroundColorSpan(Color.RED);
-        //设置秒数为红色
+        ForegroundColorSpan span = new ForegroundColorSpan(color);
+        //设置秒数的颜色
         if (millisUntilFinished / 1000 > 9) {
             spannableString.setSpan(span, 0, 2, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         } else {
@@ -69,6 +68,6 @@ public class SendSmsTimerUtils extends CountDownTimer {//验证码倒计时的�
     public void onFinish() {
         mTextView.setText("重新发送");
         mTextView.setClickable(true);
-        mTextView.setTextColor(EasyApplication.getInstance().getResources().getColor(R.color.colorPrimary));
+        mTextView.setTextColor(EasyApplication.getGloableContext().getResources().getColor(R.color.colorAccent));
     }
 }

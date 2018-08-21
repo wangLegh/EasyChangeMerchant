@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.utils.NetWorkUtils;
 

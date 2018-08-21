@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.LoginBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean;
 import com.easychange.admin.easychangemerchant.utils.MyUtils;
 import com.easychange.admin.easychangemerchant.utils.SendSmsTimerUtils;
 
@@ -22,7 +24,7 @@ import butterknife.OnClick;
  * @date 2018-06-06 17:44:36
  * @description: 忘记密码页面
  */
-public class ForgetPwdActivity extends BaseActivity {
+public class ForgetPwdActivity extends BaseActivity implements LoginPresenter.TokenCallBack {
     @BindView(R.id.iv_back)
     ImageView iv_back;
     @BindView(R.id.et_phone)
@@ -37,12 +39,14 @@ public class ForgetPwdActivity extends BaseActivity {
     EditText etAgainPwd;
     @BindView(R.id.tv_reset)
     TextView tvReset;
+    private LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_pwd);
         ButterKnife.bind(this);
+        presenter = new LoginPresenter(this,this);
     }
 
 
@@ -57,11 +61,12 @@ public class ForgetPwdActivity extends BaseActivity {
                     Toast.makeText(ForgetPwdActivity.this, "请输入手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (MyUtils.isMobileNO(etPhone.getText().toString().trim())) {
+                if (!MyUtils.isMobileNO(etPhone.getText().toString().trim())) {
                     Toast.makeText(ForgetPwdActivity.this, "请输入正确格式的手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 SendSmsTimerUtils.sendSms(tvVerify, R.color.colorPrimary, R.color.colorPrimary);
+                presenter.getPswCode(etPhone.getText().toString());
                 break;
             case R.id.tv_reset:
                 String phoneNum = etPhone.getText().toString();
@@ -80,8 +85,33 @@ public class ForgetPwdActivity extends BaseActivity {
                     Toast.makeText(this, "密码输入不一致", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                presenter.forgetPassrInfo(etPhone.getText().toString(),etVerify.getText().toString(),etPassword.getText().toString());
                 break;
         }
     }
 
+    @Override
+    public void getPassLoginInfo(LoginBean loginBean) {
+
+    }
+
+    @Override
+    public void getRegistCode(ResponseBean responseBean) {
+
+    }
+
+    @Override
+    public void registShop(ResponseBean responseBean) {
+
+    }
+
+    @Override
+    public void getForgetPswCode(ResponseBean responseBean) {
+
+    }
+
+    @Override
+    public void getForgetPassInfo(ResponseBean responseBean) {
+        finish();
+    }
 }

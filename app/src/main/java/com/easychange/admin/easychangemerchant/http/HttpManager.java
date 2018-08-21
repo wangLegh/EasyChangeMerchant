@@ -5,7 +5,10 @@ import android.util.Log;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 public class HttpManager<T> {
@@ -18,10 +21,14 @@ public class HttpManager<T> {
 
     private Object tag;
 
+    private JSONObject jsonObject;
+    private HashMap<String, Object> hashMap;
+
     public HttpManager(String url, Object tag) {
         this.url = url;
         this.tag = tag;
         params = new HttpParams();
+        hashMap = new HashMap<>();
     }
 
     /**
@@ -91,9 +98,18 @@ public class HttpManager<T> {
 
     public HttpManager<T> postTestRequest(JsonCallback<T> callback) {
         Log.d("======>>", "http method post");
-        OkGo.<T>post(url)
+        OkGo.<T>post(BASE_URL + url)
                 .tag(tag)
                 .params(params)
+                .execute(callback);
+        return this;
+    }
+
+    public HttpManager<T> postRequestJson(JsonCallback<T> callback) {
+        Log.d("======>>", "http method post");
+        OkGo.<T>post(BASE_URL + url)
+                .tag(tag)
+                .upJson(jsonObject)
                 .execute(callback);
         return this;
     }
@@ -120,6 +136,16 @@ public class HttpManager<T> {
 
     public HttpManager<T> addParams(String paramsKey, List<String> paramsValue) {
         params.putUrlParams(paramsKey, paramsValue);
+        return this;
+    }
+
+    public HttpManager<T> addParamsJson(String paramsKey,Object value){
+        hashMap.put(paramsKey,value);
+        return this;
+    }
+
+    public HttpManager<T> createPostJsonObject() {
+        jsonObject=new JSONObject(hashMap);
         return this;
     }
 }
