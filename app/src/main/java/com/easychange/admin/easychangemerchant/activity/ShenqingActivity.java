@@ -70,6 +70,7 @@ public class ShenqingActivity extends BaseActivity {
                 pvCustomOptions.show();
                 break;
             case R.id.tv_shenqing:
+
                 break;
         }
     }
@@ -90,6 +91,14 @@ public class ShenqingActivity extends BaseActivity {
                         tv_cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                pvCustomOptions.dismiss();
+                            }
+                        });
+                        final TextView tv_select_sure = (TextView) v.findViewById(R.id.tv_select_sure);
+                        tv_select_sure.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pvCustomOptions.returnData();
                                 pvCustomOptions.dismiss();
                             }
                         });

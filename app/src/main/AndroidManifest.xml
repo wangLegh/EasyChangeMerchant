@@ -75,7 +75,8 @@
         <activity android:name=".activity.YihuanbiActivity" />
         <activity android:name=".activity.ShenqingActivity" />
         <activity android:name=".activity.AboutUsActivity" />
-        <activity android:name=".activity.LiuyanActivity"></activity>
+        <activity android:name=".activity.LiuyanActivity" />
+        <activity android:name=".activity.AboutUsdesActivity"></activity>
     </application>
 
 </manifest>

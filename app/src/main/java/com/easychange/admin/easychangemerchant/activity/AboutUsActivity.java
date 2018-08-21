@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
@@ -53,7 +52,7 @@ public class AboutUsActivity extends BaseActivity {
                 showNoPassDialog();
                 break;
             case R.id.layout_about_us:
-                Toast.makeText(mContext, "缺少图标", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mContext,AboutUsdesActivity.class));
                 break;
         }
     }
