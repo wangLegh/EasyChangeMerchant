@@ -7,6 +7,13 @@ import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.AboutUsBean;
+import com.easychange.admin.easychangemerchant.http.JsonCallback;
+import com.easychange.admin.easychangemerchant.utils.MyUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +31,14 @@ public class AboutUsdesActivity extends BaseActivity {
     ImageView imgMineHeader;
     @BindView(R.id.tv_mine_name)
     TextView tvMineName;
+    @BindView(R.id.tv_weixin)
+    TextView tv_weixin;
+    @BindView(R.id.tv_email)
+    TextView tv_email;
+    @BindView(R.id.tv_guanwang)
+    TextView tv_guanwang;
+    @BindView(R.id.tv_phone)
+    TextView tv_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +46,21 @@ public class AboutUsdesActivity extends BaseActivity {
         setContentView(R.layout.activity_about_usdes);
         ButterKnife.bind(this);
         viewHeaderTitle.setText("关于我们");
+        OkGo.<AboutUsBean>get("http://39.106.220.142/aboutus/aboutusList")
+                .tag(this)
+                .execute(new JsonCallback<AboutUsBean>() {
+                    @Override
+                    public void onSuccess(Response<AboutUsBean> response) {
+                        List<AboutUsBean.DataEntity> data = response.body().getData();
+                        if (data != null && data.size() > 0) {
+                            tv_weixin.setText(data.get(1).getContent());
+                            tv_phone.setText(data.get(0).getContent());
+                            tv_email.setText(data.get(2).getContent());
+                            tv_guanwang.setText(data.get(3).getContent());
+                        }
+                    }
+                });
+        tvMineName.setText("V "+MyUtils.getAppVersion(this));
     }
 
     @OnClick(R.id.view_header_back)
