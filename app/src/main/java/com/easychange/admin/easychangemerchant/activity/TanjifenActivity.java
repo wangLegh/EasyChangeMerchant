@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.adapter.TanjifenAdapter;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.MingxiBean;
+import com.easychange.admin.easychangemerchant.p.TanjifenPresenter;
+import com.easychange.admin.easychangemerchant.utils.CacheUtils;
 import com.easychange.admin.easychangemerchant.views.WanRecyclerView;
 
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.OnItemClickListener, WanRecyclerView.PullRecyclerViewCallBack {
+public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.OnItemClickListener, WanRecyclerView.PullRecyclerViewCallBack, TanjifenPresenter.MingxiCallBack {
 
     @BindView(R.id.view_header_back)
     FrameLayout viewHeaderBack;
@@ -31,18 +35,24 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
     @BindView(R.id.tanjifen_recyclerView)
     WanRecyclerView tanjifenRecyclerView;
     private List<String> lists;
-
     private TanjifenAdapter adapter;
+    int pageNum = 1;
+    private List<MingxiBean> mData = new ArrayList<>();
+    private TanjifenPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tanjifen);
         ButterKnife.bind(this);
+        presenter = new TanjifenPresenter(this,this);
+        presenter.getMingxiList(pageNum,10);
         initView();
     }
     private void initView() {
         viewHeaderTitle.setText("碳积分");
         viewHeaderRightBtn.setText("明细");
+        tvTanjifenNum.setText(CacheUtils.get("tanjifen")+"");
         viewHeaderRightBtn.setVisibility(View.VISIBLE);
         tanjifenRecyclerView.setLinearLayout();
 
@@ -72,11 +82,31 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
 
     @Override
     public void onRefresh() {
-
+        pageNum = 1;
+        mData.clear();
+        presenter.getMingxiList( pageNum, 10);
     }
 
     @Override
     public void onLoadMore() {
+        pageNum++;
+        presenter.getMingxiList( pageNum, 10);
+    }
 
+    @Override
+    public void getMingxiList(List<MingxiBean> datas) {
+//        if (datas != null) {
+//            mData.addAll(datas);
+//            tanjifenRecyclerView.setHasMore(datas.size(), 10);
+//        } else {
+//            tanjifenRecyclerView.setHasMore(0, 10);
+//        }
+//        adapter.notifyDataSetChanged();
+//        tanjifenRecyclerView.setStateView(mData.size());
+    }
+
+    @Override
+    public void getMingxiListFail(String msg) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
 }

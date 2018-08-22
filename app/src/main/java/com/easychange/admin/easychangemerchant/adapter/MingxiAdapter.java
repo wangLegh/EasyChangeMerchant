@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.bean.MingxiBean;
+import com.easychange.admin.easychangemerchant.utils.MyUtils;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class MingxiAdapter extends RecyclerView.Adapter {
 
-    private List<String> datas;
+    private List<MingxiBean> datas;
 
     private Context context;
 
@@ -27,7 +29,7 @@ public class MingxiAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public MingxiAdapter(List<String> datas, Context context) {
+    public MingxiAdapter(List<MingxiBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
@@ -43,6 +45,8 @@ public class MingxiAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.tv_faxing_num.setText(datas.get(position).getAmount()+"");
+            viewHolder.tv_faxing_time.setText(MyUtils.getDateTimeFromMillisecond(datas.get(position).getCreateDate())+"");
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,7 +58,7 @@ public class MingxiAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
