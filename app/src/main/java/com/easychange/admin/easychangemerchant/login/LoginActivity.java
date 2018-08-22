@@ -91,6 +91,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.TokenC
         CacheUtils.put("head", loginBean.getShopLogo());
         CacheUtils.put("name", loginBean.getBusinessName());
         CacheUtils.put("address", loginBean.getShopAddr());
+        CacheUtils.put("tanjifen", loginBean.getCarboniNtegral());
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }

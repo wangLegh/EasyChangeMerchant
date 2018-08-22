@@ -102,6 +102,7 @@ public class MyCodeActivity extends BaseActivity {
 
     //保存图片到指定目录
     public boolean saveImageToGallery(Context context, Bitmap bmp) {
+        //与系统有关的默认名称分隔符。 file.separator在Linux系统上，此字段的值为 '/'；在Windows 系统上，它为 '\'。
         String galleryPath = context.getExternalFilesDir("易换云商家二维码") + File.separator + "易换云商家二维码";
         File appDir = new File(galleryPath);
         if (!appDir.exists()) {

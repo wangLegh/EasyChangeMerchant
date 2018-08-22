@@ -34,7 +34,7 @@ public class LoginBean {
      */
     private int distance;
     private String city;
-    private String latitude;
+    private double latitude;
     private String businessName;
     private String pageSize;
     private String password;
@@ -47,7 +47,7 @@ public class LoginBean {
     private int deadline;
     private int turnover;
     private String situation;
-    private String longitude;
+    private double longitude;
     private String shopAddr;
     private String shopLogo;
     private String telephone;
@@ -59,7 +59,7 @@ public class LoginBean {
     private long expirationTime;
     private int circulation;
     private String category;
-    private String carboniNtegral;
+    private int carboniNtegral;
 
     public void setDistance(int distance) {
         this.distance = distance;
@@ -69,7 +69,7 @@ public class LoginBean {
         this.city = city;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -121,7 +121,7 @@ public class LoginBean {
         this.situation = situation;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -169,7 +169,7 @@ public class LoginBean {
         this.category = category;
     }
 
-    public void setCarboniNtegral(String carboniNtegral) {
+    public void setCarboniNtegral(int carboniNtegral) {
         this.carboniNtegral = carboniNtegral;
     }
 
@@ -181,7 +181,7 @@ public class LoginBean {
         return city;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -233,7 +233,7 @@ public class LoginBean {
         return situation;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -281,7 +281,7 @@ public class LoginBean {
         return category;
     }
 
-    public String getCarboniNtegral() {
+    public int getCarboniNtegral() {
         return carboniNtegral;
     }
 }
