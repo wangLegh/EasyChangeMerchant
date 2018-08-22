@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.text.TextUtils;
-import android.util.Log;
 
 import com.easychange.admin.easychangemerchant.utils.CacheUtils;
 import com.lzy.okgo.OkGo;
@@ -21,8 +19,6 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -146,6 +142,6 @@ public class EasyApplication extends Application {
     }
 
     public static String getUserId(){
-        return CacheUtils.get("id");
+        return CacheUtils.get("id")+"";
     }
 }

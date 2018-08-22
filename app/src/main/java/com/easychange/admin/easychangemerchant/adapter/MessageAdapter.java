@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.bean.MessageBean;
+import com.easychange.admin.easychangemerchant.utils.MyUtils;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class MessageAdapter extends RecyclerView.Adapter {
 
-    private List<String> datas;
+    private List<MessageBean> datas;
 
     private Context context;
 
@@ -27,9 +29,14 @@ public class MessageAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public MessageAdapter(List<String> datas, Context context) {
+    public MessageAdapter(List<MessageBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
+    }
+
+    public void insertData(List<MessageBean> data){
+        this.datas.addAll(data);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -43,6 +50,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.tvMessageContent.setText(datas.get(position).getTitle());
+            String dateTimeFromMillisecond = MyUtils.getDateTimeFromMillisecond(datas.get(position).getCreateDate());
+            viewHolder.tvMessageTime.setText(dateTimeFromMillisecond);
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,7 +64,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

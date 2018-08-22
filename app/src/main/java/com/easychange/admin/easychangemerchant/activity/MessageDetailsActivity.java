@@ -7,6 +7,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.bean.MessageBean;
+import com.easychange.admin.easychangemerchant.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +35,15 @@ public class MessageDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message_details);
         ButterKnife.bind(this);
         viewHeaderTitle.setText("消息详情");
+        MessageBean data = (MessageBean) getIntent().getSerializableExtra("data");
+        if (data != null) {
+            String content = data.getContent();
+            long createDate = data.getCreateDate();
+            String title = data.getTitle();
+            tvMessageTitle.setText(title);
+            tvMessageTime.setText(MyUtils.getDateTimeFromMillisecond(createDate));
+            tvMessageContent.setText(content);
+        }
     }
 
     @OnClick({R.id.view_header_back, R.id.view_header_title})
