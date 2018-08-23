@@ -3,6 +3,7 @@ package com.easychange.admin.easychangemerchant.p;
 import android.app.Activity;
 
 import com.easychange.admin.easychangemerchant.EasyApplication;
+import com.easychange.admin.easychangemerchant.bean.DuihuanBean;
 import com.easychange.admin.easychangemerchant.bean.MingxiBean;
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
@@ -42,10 +43,27 @@ public class TanjifenPresenter {
                     }
                 });
     }
+    public void getDuihuanList(){
+            new HttpManager<ResponseBean<List<DuihuanBean>>>("/merchantApp/carboniWasteList", this)
+                .addParams("id", EasyApplication.getUserId())
+                .getRequets(new DialogCallback<ResponseBean<List<DuihuanBean>>>(activity) {
+                    @Override
+                    public void onSuccess(Response<ResponseBean<List<DuihuanBean>>> response) {
+                        callBack.getDuihuanList(response.body().data);
+                    }
 
+                    @Override
+                    public void onError(Response<ResponseBean<List<DuihuanBean>>> response) {
+                        super.onError(response);
+                        callBack.getMingxiListFail(response.getException().getMessage());
+                    }
+                });
+    }
     public interface MingxiCallBack{
 
         void getMingxiList(List<MingxiBean> data);
+
+        void getDuihuanList(List<DuihuanBean> data);
 
         void getMingxiListFail(String msg);
     }

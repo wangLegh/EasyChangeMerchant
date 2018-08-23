@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.adapter.TanjifenAdapter;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.DuihuanBean;
 import com.easychange.admin.easychangemerchant.bean.MingxiBean;
 import com.easychange.admin.easychangemerchant.p.TanjifenPresenter;
 import com.easychange.admin.easychangemerchant.utils.CacheUtils;
@@ -34,10 +35,12 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
     TextView tvTanjifenNum;
     @BindView(R.id.tanjifen_recyclerView)
     WanRecyclerView tanjifenRecyclerView;
+    @BindView(R.id.tv_no_more)
+    TextView tvNoMore;
     private List<String> lists;
     private TanjifenAdapter adapter;
     int pageNum = 1;
-    private List<MingxiBean> mData = new ArrayList<>();
+    private List<DuihuanBean> mData = new ArrayList<>();
     private TanjifenPresenter presenter;
 
     @Override
@@ -45,19 +48,20 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tanjifen);
         ButterKnife.bind(this);
-        presenter = new TanjifenPresenter(this,this);
-        presenter.getMingxiList(pageNum,10);
+        presenter = new TanjifenPresenter(this, this);
+        presenter.getDuihuanList();
         initView();
     }
+
     private void initView() {
         viewHeaderTitle.setText("碳积分");
         viewHeaderRightBtn.setText("明细");
-        tvTanjifenNum.setText(CacheUtils.get("tanjifen")+"");
+        tvTanjifenNum.setText(CacheUtils.get("tanjifen") + "");
         viewHeaderRightBtn.setVisibility(View.VISIBLE);
         tanjifenRecyclerView.setLinearLayout();
 
         lists = new ArrayList<>();
-        adapter = new TanjifenAdapter(lists, this);
+        adapter = new TanjifenAdapter(mData, this);
         tanjifenRecyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         tanjifenRecyclerView.setPullRecyclerViewListener(this);
@@ -70,7 +74,7 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
                 finish();
                 break;
             case R.id.view_header_rightBtn:
-                startActivity(new Intent(mContext,MingxiActivity.class));
+                startActivity(new Intent(mContext, MingxiActivity.class));
                 break;
         }
     }
@@ -82,27 +86,36 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
 
     @Override
     public void onRefresh() {
-        pageNum = 1;
         mData.clear();
-        presenter.getMingxiList( pageNum, 10);
+        presenter.getDuihuanList();
     }
 
     @Override
     public void onLoadMore() {
-        pageNum++;
-        presenter.getMingxiList( pageNum, 10);
+        presenter.getDuihuanList();
     }
 
     @Override
     public void getMingxiList(List<MingxiBean> datas) {
-//        if (datas != null) {
-//            mData.addAll(datas);
-//            tanjifenRecyclerView.setHasMore(datas.size(), 10);
-//        } else {
-//            tanjifenRecyclerView.setHasMore(0, 10);
-//        }
-//        adapter.notifyDataSetChanged();
-//        tanjifenRecyclerView.setStateView(mData.size());
+    }
+
+    @Override
+    public void getDuihuanList(List<DuihuanBean> datas) {
+        if (datas != null) {
+            if (datas.size()<=0){
+                tanjifenRecyclerView.setVisibility(View.GONE);
+                tvNoMore.setVisibility(View.VISIBLE);
+                return;
+            }
+            tanjifenRecyclerView.setVisibility(View.VISIBLE);
+            tvNoMore.setVisibility(View.GONE);
+            mData.addAll(datas);
+            tanjifenRecyclerView.setHasMore(datas.size(), 10);
+        } else {
+            tanjifenRecyclerView.setHasMore(0, 10);
+        }
+        adapter.notifyDataSetChanged();
+        tanjifenRecyclerView.setStateView(mData.size());
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easychange.admin.easychangemerchant.R;
+import com.easychange.admin.easychangemerchant.bean.DuihuanBean;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class TanjifenAdapter extends RecyclerView.Adapter {
 
-    private List<String> datas;
+    private List<DuihuanBean> datas;
 
     private Context context;
 
@@ -27,7 +28,7 @@ public class TanjifenAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public TanjifenAdapter(List<String> datas, Context context) {
+    public TanjifenAdapter(List<DuihuanBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
@@ -43,6 +44,7 @@ public class TanjifenAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.tv_tanjifen_duihuan.setText(datas.get(position).getSort()+"");
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,7 +56,7 @@ public class TanjifenAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

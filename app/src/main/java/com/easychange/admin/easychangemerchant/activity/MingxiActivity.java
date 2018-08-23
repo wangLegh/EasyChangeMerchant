@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.adapter.MingxiAdapter;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
+import com.easychange.admin.easychangemerchant.bean.DuihuanBean;
 import com.easychange.admin.easychangemerchant.bean.MingxiBean;
 import com.easychange.admin.easychangemerchant.p.TanjifenPresenter;
 import com.easychange.admin.easychangemerchant.views.WanRecyclerView;
@@ -94,6 +95,11 @@ public class MingxiActivity extends BaseActivity implements MingxiAdapter.OnItem
         }
         adapter.notifyDataSetChanged();
         mingxiRecyclerView.setStateView(mData.size());
+    }
+
+    @Override
+    public void getDuihuanList(List<DuihuanBean> data) {
+
     }
 
     @Override

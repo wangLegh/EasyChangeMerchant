@@ -1,6 +1,7 @@
 package com.easychange.admin.easychangemerchant.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -65,6 +66,14 @@ public class AboutUsActivity extends BaseActivity {
                 .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 .isOnTouchCanceled(true)
                 .builder();
+        dialog.getView(R.id.layout_call).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dialIntent =  new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "010-123456"));//跳转到拨号界面，同时传递电话号码
+                startActivity(dialIntent);
+            }
+        });
         dialog.show();
+
     }
 }
