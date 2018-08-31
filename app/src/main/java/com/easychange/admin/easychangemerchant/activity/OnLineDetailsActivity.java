@@ -108,7 +108,7 @@ public class OnLineDetailsActivity extends BaseActivity implements SoldOutPresen
 
     @Override
     public void requestSoldOutFail() {
-        Toast.makeText(this,"操作失败", Toast.LENGTH_SHORT).show();
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

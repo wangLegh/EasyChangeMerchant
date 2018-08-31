@@ -1,6 +1,7 @@
 package com.easychange.admin.easychangemerchant.p;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.easychange.admin.easychangemerchant.EasyApplication;
 import com.easychange.admin.easychangemerchant.bean.ActionBean;
@@ -25,6 +26,8 @@ public class ActionPresenter {
     }
 
     public void getActionList(int page, String status, String time){
+        String userToken = EasyApplication.getUserToken();
+        Log.d("ActionPresenter", userToken+"------");
         new HttpManager<ResponseBean<List<ActionBean>>>("merchantApp/selectActivityList", this)
                 .addParams("pageNum", page)
                 .addParams("status", status)

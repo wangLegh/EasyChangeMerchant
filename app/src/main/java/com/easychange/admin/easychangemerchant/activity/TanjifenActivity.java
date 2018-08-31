@@ -13,7 +13,6 @@ import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.bean.DuihuanBean;
 import com.easychange.admin.easychangemerchant.bean.MingxiBean;
 import com.easychange.admin.easychangemerchant.p.TanjifenPresenter;
-import com.easychange.admin.easychangemerchant.utils.CacheUtils;
 import com.easychange.admin.easychangemerchant.views.WanRecyclerView;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
     private List<String> lists;
     private TanjifenAdapter adapter;
     int pageNum = 1;
-    private List<DuihuanBean> mData = new ArrayList<>();
+    private List<DuihuanBean.ListBean> mData = new ArrayList<>();
     private TanjifenPresenter presenter;
 
     @Override
@@ -56,7 +55,7 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
     private void initView() {
         viewHeaderTitle.setText("碳积分");
         viewHeaderRightBtn.setText("明细");
-        tvTanjifenNum.setText(CacheUtils.get("tanjifen") + "");
+
         viewHeaderRightBtn.setVisibility(View.VISIBLE);
         tanjifenRecyclerView.setLinearLayout();
 
@@ -100,17 +99,18 @@ public class TanjifenActivity extends BaseActivity implements TanjifenAdapter.On
     }
 
     @Override
-    public void getDuihuanList(List<DuihuanBean> datas) {
+    public void getDuihuanList(DuihuanBean datas) {
         if (datas != null) {
-            if (datas.size()<=0){
+            tvTanjifenNum.setText(datas.getCarboniNtegral()+"");
+            if (datas.getList().size()<=0){
                 tanjifenRecyclerView.setVisibility(View.GONE);
                 tvNoMore.setVisibility(View.VISIBLE);
                 return;
             }
             tanjifenRecyclerView.setVisibility(View.VISIBLE);
             tvNoMore.setVisibility(View.GONE);
-            mData.addAll(datas);
-            tanjifenRecyclerView.setHasMore(datas.size(), 10);
+            mData.addAll(datas.getList());
+            tanjifenRecyclerView.setHasMore(datas.getList().size(), 10);
         } else {
             tanjifenRecyclerView.setHasMore(0, 10);
         }

@@ -1,9 +1,11 @@
 package com.easychange.admin.easychangemerchant.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -75,16 +77,21 @@ public class ShenqingActivity extends BaseActivity implements YihuanbiPresenter.
                 break;
             case R.id.iv_select_date:
                 pvCustomOptions.show();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                 break;
             case R.id.tv_date:
                 pvCustomOptions.show();
+                InputMethodManager imm1 = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm1.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                 break;
             case R.id.tv_shenqing:
                 if (TextUtils.isEmpty(etFaxingliang.getText().toString())) {
                     Toast.makeText(mContext, "请输入易换币数量", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                presenter.ApplyRequest( etFaxingliang.getText().toString(), tvDate.getText().toString());
+                String substring =  tvDate.getText().toString().substring(0, 1);
+                presenter.ApplyRequest(etFaxingliang.getText().toString() ,substring);
                 break;
         }
     }

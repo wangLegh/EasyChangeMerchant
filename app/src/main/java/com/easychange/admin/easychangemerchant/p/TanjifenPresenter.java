@@ -44,16 +44,16 @@ public class TanjifenPresenter {
                 });
     }
     public void getDuihuanList(){
-            new HttpManager<ResponseBean<List<DuihuanBean>>>("/merchantApp/carboniWasteList", this)
+            new HttpManager<ResponseBean<DuihuanBean>>("/merchantApp/carboniWasteList", this)
                 .addParams("id", EasyApplication.getUserId())
-                .getRequets(new DialogCallback<ResponseBean<List<DuihuanBean>>>(activity) {
+                .getRequets(new DialogCallback<ResponseBean<DuihuanBean>>(activity) {
                     @Override
-                    public void onSuccess(Response<ResponseBean<List<DuihuanBean>>> response) {
+                    public void onSuccess(Response<ResponseBean<DuihuanBean>> response) {
                         callBack.getDuihuanList(response.body().data);
                     }
 
                     @Override
-                    public void onError(Response<ResponseBean<List<DuihuanBean>>> response) {
+                    public void onError(Response<ResponseBean<DuihuanBean>> response) {
                         super.onError(response);
                         callBack.getMingxiListFail(response.getException().getMessage());
                     }
@@ -63,7 +63,7 @@ public class TanjifenPresenter {
 
         void getMingxiList(List<MingxiBean> data);
 
-        void getDuihuanList(List<DuihuanBean> data);
+        void getDuihuanList(DuihuanBean data);
 
         void getMingxiListFail(String msg);
     }

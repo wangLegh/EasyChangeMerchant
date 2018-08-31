@@ -246,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        android:text="优惠卷发布数量："
+                        android:text="优惠券发布数量："
                         android:textColor="#333"
                         android:textSize="15sp" />
 
@@ -260,7 +260,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="right|center_vertical"
-                        android:hint="请输入优惠卷的发布数量"
+                        android:hint="请输入优惠券的发布数量"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="#333"

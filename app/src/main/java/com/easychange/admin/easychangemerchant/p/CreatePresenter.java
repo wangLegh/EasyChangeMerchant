@@ -1,6 +1,8 @@
 package com.easychange.admin.easychangemerchant.p;
 
 import android.app.Activity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
@@ -49,12 +51,19 @@ public class CreatePresenter {
                 .postRequest(new DialogCallback<ResponseBean<Void>>(activity) {
                     @Override
                     public void onSuccess(Response<ResponseBean<Void>> response) {
-                        callBack.requestCreateActionSuccess();
+                        if (response.body().code==200){
+                            callBack.requestCreateActionSuccess();
+                            Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                     @Override
                     public void onError(Response<ResponseBean<Void>> response) {
                         super.onError(response);
+                        Log.d("CreatePresenter", response.getException().getMessage()+"---------");
                     }
                 });
     }

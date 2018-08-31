@@ -98,7 +98,7 @@ public class MingxiActivity extends BaseActivity implements MingxiAdapter.OnItem
     }
 
     @Override
-    public void getDuihuanList(List<DuihuanBean> data) {
+    public void getDuihuanList(DuihuanBean data) {
 
     }
 

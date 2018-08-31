@@ -1,6 +1,7 @@
 package com.easychange.admin.easychangemerchant.p;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.easychange.admin.easychangemerchant.EasyApplication;
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
@@ -22,7 +23,7 @@ public class SoldOutPresenter {
     }
 
     public void setSoldOutRequest(String id){
-        new HttpManager<ResponseBean>("manager/myShop/soldOutActivity", this)
+        new HttpManager<ResponseBean>("/merchantApp/soldOutActivity", this)
                 .addParams("userId", EasyApplication.getUserId())
                 .addParams("id", id)
                 .postRequest(new DialogCallback<ResponseBean>(activity) {
@@ -34,6 +35,7 @@ public class SoldOutPresenter {
                     @Override
                     public void onError(Response<ResponseBean> response) {
                         super.onError(response);
+                        Log.d("SoldOutPresenter", response.getException().getMessage()+"-------");
                         callBack.requestSoldOutFail();
                     }
                 });

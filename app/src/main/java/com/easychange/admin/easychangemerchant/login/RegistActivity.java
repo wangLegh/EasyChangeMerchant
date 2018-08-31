@@ -1,11 +1,13 @@
 package com.easychange.admin.easychangemerchant.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -145,7 +147,6 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
                     Toast.makeText(RegistActivity.this, "请输入正确格式的手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                SendSmsTimerUtils.sendSms(tvVerify, R.color.colorPrimary, R.color.colorPrimary);
                 presenter.getRegistCode(etFarenPhone.getText().toString());
                 break;
             case R.id.iv_camera:
@@ -155,6 +156,8 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
                 finish();
                 break;
             case R.id.iv_select_date:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                 initCustomOptionPicker(true, timeList);
                 pvCustomOptions.show();
                 break;
@@ -230,7 +233,12 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
 
     @Override
     public void getRegistCode(ResponseBean responseBean) {
-
+        if (responseBean.code==200){
+            Toast.makeText(mContext, responseBean.msg, Toast.LENGTH_SHORT).show();
+            SendSmsTimerUtils.sendSms(tvVerify, R.color.colorPrimary, R.color.colorPrimary);
+        }else {
+            Toast.makeText(mContext, responseBean.msg, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

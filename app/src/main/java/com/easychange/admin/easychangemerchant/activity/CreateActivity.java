@@ -31,6 +31,9 @@ import java.util.Date;
  */
 public class CreateActivity extends BaseActivity implements View.OnClickListener, CreatePresenter.CreateCallBack {
 
+    private long startTime;
+    private long startSpecificTime;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +129,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
+                startTime = date2.getTime();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
                 tvStartTime.setText(format.format(date2));
             }
@@ -151,8 +155,12 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
-                SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-                tvStopTime.setText(format.format(date2));
+                if (date2.getTime()>startTime){
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+                    tvStopTime.setText(format.format(date2));
+                }else {
+                    Toast.makeText(mContext, "结束时间应该在起始时间之后", Toast.LENGTH_SHORT).show();
+                }
             }
         })
                 .setType(TimePickerView.Type.YEAR_MONTH_DAY)//默认全部显示
@@ -176,6 +184,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
+                startSpecificTime = date2.getTime();
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                 tvSpecificStartTime.setText(format.format(date2));
             }
@@ -201,8 +210,13 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
-                SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-                tvSpecificStopTime.setText(format.format(date2));
+                if (date2.getTime()>startSpecificTime){
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                    tvSpecificStopTime.setText(format.format(date2));
+                }else {
+                    Toast.makeText(mContext, "结束时间应该在起始时间之后", Toast.LENGTH_SHORT).show();
+                }
+
 //                tvSpecificStopTime.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
             }
         })
@@ -247,8 +261,11 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                         .hideSoftInputFromWindow(getCurrentFocus()
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
-
-                showStopTimeSelect();
+                if (tvStartTime.getText().toString().equals("请选择")){
+                    Toast.makeText(mContext, "请选择起始时间", Toast.LENGTH_SHORT).show();
+                }else {
+                    showStopTimeSelect();
+                }
                 break;
             case R.id.act_create_action_specificStartTime:
                 ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
@@ -263,8 +280,12 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                         .hideSoftInputFromWindow(getCurrentFocus()
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
+                if (tvSpecificStartTime.getText().toString().equals("请输入具体开始时间")){
+                    Toast.makeText(mContext, "请输入具体开始时间", Toast.LENGTH_SHORT).show();
+                }else {
+                    showSpecificStopTimeSelect();
+                }
 
-                showSpecificStopTimeSelect();
                 break;
             case R.id.act_create_action_submit:
                 if (TextUtils.isEmpty(etCompanyName.getText().toString().trim())) {
@@ -286,7 +307,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "请选择活动时间", Toast.LENGTH_SHORT).show();
 
                 } else if (TextUtils.isEmpty(etCouponNum.getText().toString())) {
-                    Toast.makeText(this, "请输入优惠卷发布数量", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入优惠券发布数量", Toast.LENGTH_SHORT).show();
 
                 } else if (TextUtils.isEmpty(etCoinNum.getText().toString())) {
                     Toast.makeText(this, "请输入易换币数量", Toast.LENGTH_SHORT).show();
@@ -325,7 +346,6 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void requestCreateActionSuccess() {
-        Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
         finish();
     }
 }

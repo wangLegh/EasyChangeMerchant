@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class TanjifenAdapter extends RecyclerView.Adapter {
 
-    private List<DuihuanBean> datas;
+    private List<DuihuanBean.ListBean> datas;
 
     private Context context;
 
@@ -28,7 +28,7 @@ public class TanjifenAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public TanjifenAdapter(List<DuihuanBean> datas, Context context) {
+    public TanjifenAdapter(List<DuihuanBean.ListBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }

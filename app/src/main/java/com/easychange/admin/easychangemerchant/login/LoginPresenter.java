@@ -71,6 +71,12 @@ public class LoginPresenter {
                             Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                         }
                     }
+
+                    @Override
+                    public void onError(Response<ResponseBean<LoginBean>> response) {
+                        super.onError(response);
+                        Toast.makeText(activity, response.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
