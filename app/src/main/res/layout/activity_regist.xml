@@ -131,7 +131,7 @@
                         android:id="@+id/view_01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="验 证 码："
+                        android:text="验  证  码："
                         android:textColor="@color/textcolor"/>
                     <EditText
                         android:id="@+id/et_verify"
@@ -236,7 +236,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="营 业 额："
+                        android:text="营  业  额："
                         android:textColor="@color/textcolor"/>
                     <EditText
                         android:id="@+id/et_yingyee"
@@ -261,7 +261,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="发 行 量："
+                        android:text="发  行  量："
                         android:textColor="@color/textcolor"/>
                     <EditText
                         android:id="@+id/et_faxingliang"
@@ -288,7 +288,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:text="期      限："
+                        android:text="期         限："
                         android:textColor="@color/textcolor"/>
                     <RelativeLayout
                         android:layout_width="wrap_content"

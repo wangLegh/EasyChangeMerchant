@@ -8,6 +8,7 @@ import com.easychange.admin.easychangemerchant.bean.LoginBean;
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.lzy.okgo.model.Response;
 
 /**
@@ -58,18 +59,17 @@ public class LoginPresenter {
      * 密码登录
      */
     public void getPassLoginInfo(String phone, String password) {
-        new HttpManager<ResponseBean<LoginBean>>("merchantApp/login", this)
+        new HttpManager<ResponseBean2<LoginBean>>("merchantApp/login", this)
                 .addParams("phone", phone)
                 .addParams("password", password)
-                .postRequest(new DialogCallback<ResponseBean<LoginBean>>(activity) {
+                .postRequest(new DialogCallback<ResponseBean2<LoginBean>>(activity) {
                     @Override
-                    public void onSuccess(Response<ResponseBean<LoginBean>> response) {
+                    public void onSuccess(Response<ResponseBean2<LoginBean>> response) {
                         if (response.body().data != null) {
-                            if (response.body().code == 200)
+                            if (response.body().code.equals("200"))
                                 callBack.getPassLoginInfo(response.body().data);
-                        } else {
-                            Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                         }
+                        Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
