@@ -98,7 +98,7 @@ public class MineFragment extends BaseFragment {
             case R.id.layout_mine_tanjifen://碳积分
                 startActivity(new Intent(mContext, TanjifenActivity.class));
                 break;
-            case R.id.layout_mine_yihuanbi://易换币
+            case R.id.layout_mine_yihuanbi://易换券
                 startActivity(new Intent(mContext, YihuanbiActivity.class));
                 break;
             case R.id.layout_mine_erweima://商家二维码

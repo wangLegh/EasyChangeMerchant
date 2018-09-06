@@ -72,7 +72,7 @@ public class SubmitAuditDetailsActivity extends BaseActivity {
 
         tvActionLimit.setText("满" + actionBean.getFull() + "减" + actionBean.getSub());
 
-        tvCouponPrice.setText(actionBean.getPrice() + "易换币");
+        tvCouponPrice.setText(actionBean.getPrice() + "易换券");
 
         btnPass.setOnClickListener(new View.OnClickListener() {
             @Override

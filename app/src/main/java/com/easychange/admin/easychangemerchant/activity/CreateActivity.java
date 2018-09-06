@@ -310,7 +310,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "请输入优惠券发布数量", Toast.LENGTH_SHORT).show();
 
                 } else if (TextUtils.isEmpty(etCoinNum.getText().toString())) {
-                    Toast.makeText(this, "请输入易换币数量", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入易换券数量", Toast.LENGTH_SHORT).show();
 
                 } else if (TextUtils.isEmpty(etMaxNum.getText().toString())) {
                     Toast.makeText(this, "请设置满减", Toast.LENGTH_SHORT).show();

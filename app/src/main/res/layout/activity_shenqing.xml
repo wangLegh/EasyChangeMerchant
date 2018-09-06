@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="申请易换币数量："
+            android:text="申请易换券数量："
             android:textColor="@color/textcolor"/>
         <EditText
             android:id="@+id/et_faxingliang"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:background="@null"
-            android:hint="请输入易换币数量"
+            android:hint="请输入易换券数量"
             android:inputType="phone"
             android:textSize="14sp"/>
     </LinearLayout>

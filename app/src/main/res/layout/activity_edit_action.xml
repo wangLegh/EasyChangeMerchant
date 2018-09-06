@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        android:text="价值易换币数量："
+                        android:text="价值易换券数量："
                         android:textColor="#333"
                         android:textSize="15sp" />
 

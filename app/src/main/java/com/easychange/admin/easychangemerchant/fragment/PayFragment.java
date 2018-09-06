@@ -51,7 +51,7 @@ public class PayFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         if (tab_list.size() == 0) {
             tab_list.add("优惠券核销");
-            tab_list.add("易换币核销");
+            tab_list.add("易换券核销");
         }
         if (fragmentList.size() == 0) {
             fragmentList.add(new QuanFragment());

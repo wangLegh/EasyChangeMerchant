@@ -53,7 +53,7 @@ public class HistoryDetailsActivity extends BaseActivity {
 
         tvSuccessNum.setText(actionBean.getOrderQuantity() + "单");
 
-        tvCoinNum.setText(actionBean.getGainCurrency() + "易换币");
+        tvCoinNum.setText(actionBean.getGainCurrency() + "易换券");
 
         switch (actionBean.getOnsale()) {
             case "1":

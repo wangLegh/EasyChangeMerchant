@@ -60,7 +60,7 @@ public class ActionEditActivity extends BaseActivity implements View.OnClickList
 
         tvSuccessNum.setText(actionBean.getOrderQuantity() + "单");
 
-        tvCoinNum.setText(actionBean.getGainCurrency() + "易换币");
+        tvCoinNum.setText(actionBean.getGainCurrency() + "易换券");
     }
 
     private TextView tvStopTime;

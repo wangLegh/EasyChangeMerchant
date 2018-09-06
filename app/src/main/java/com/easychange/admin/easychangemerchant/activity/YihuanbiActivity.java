@@ -54,7 +54,7 @@ public class YihuanbiActivity extends BaseActivity implements YihuanbiAdapter.On
     }
 
     private void initView() {
-        viewHeaderTitle.setText("易换币");
+        viewHeaderTitle.setText("易换券");
         yihuanbiRecyclerView.setLinearLayout();
         adapter = new YihuanbiAdapter(mData, this);
         yihuanbiRecyclerView.setAdapter(adapter);

@@ -55,7 +55,7 @@ public class OnLineAdapter extends RecyclerView.Adapter {
 
             viewHolder.tvSuccessNum.setText(datas.get(position).getOrderQuantity() + "单");
 
-            viewHolder.tvCoinNum.setText(datas.get(position).getGainCurrency() + "易换币");
+            viewHolder.tvCoinNum.setText(datas.get(position).getGainCurrency() + "易换券");
 
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

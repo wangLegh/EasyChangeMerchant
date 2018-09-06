@@ -163,7 +163,7 @@
                 <TextView
                     android:drawablePadding="10dip"
                     android:gravity="center_vertical"
-                    android:text="易换币"
+                    android:text="易换券"
                     android:paddingLeft="15dip"
                     android:drawableLeft="@drawable/yihuanbi3x"
                     android:layout_width="0dip"

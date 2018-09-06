@@ -73,7 +73,7 @@ public class LoginPresenter {
                     }
 
                     @Override
-                    public void onError(Response<ResponseBean<LoginBean>> response) {
+                    public void onError(Response<ResponseBean2<LoginBean>> response) {
                         super.onError(response);
                         Toast.makeText(activity, response.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

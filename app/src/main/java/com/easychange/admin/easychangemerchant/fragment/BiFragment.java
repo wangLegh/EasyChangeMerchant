@@ -50,7 +50,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener, Sa
         switch (view.getId()) {
             case R.id.tv_sao:
                 if (TextUtils.isEmpty(et_count.getText().toString())) {
-                    Toast.makeText(mContext, "请输入需要核销易换币数量", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请输入需要核销易换券数量", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 checkPermission(permission);

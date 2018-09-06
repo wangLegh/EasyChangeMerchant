@@ -74,7 +74,7 @@ public class OnLineDetailsActivity extends BaseActivity implements SoldOutPresen
 
         tvSuccessNum.setText(actionBean.getOrderQuantity() + "单");
 
-        tvCoinNum.setText(actionBean.getGainCurrency() + "易换币");
+        tvCoinNum.setText(actionBean.getGainCurrency() + "易换券");
 
         stopAction.setOnClickListener(new View.OnClickListener() {
             @Override

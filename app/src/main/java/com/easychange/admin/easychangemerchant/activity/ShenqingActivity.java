@@ -45,6 +45,7 @@ public class ShenqingActivity extends BaseActivity implements YihuanbiPresenter.
     private OptionsPickerView pvCustomOptions;
     private List<String> timeList;
     private YihuanbiPresenter presenter;
+    private String substring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class ShenqingActivity extends BaseActivity implements YihuanbiPresenter.
     }
 
     private void initData() {
-        viewHeaderTitle.setText("易换币");
+        viewHeaderTitle.setText("易换券");
         timeList = new ArrayList<>();
         timeList.add("1年");
         timeList.add("2年");
@@ -87,11 +88,15 @@ public class ShenqingActivity extends BaseActivity implements YihuanbiPresenter.
                 break;
             case R.id.tv_shenqing:
                 if (TextUtils.isEmpty(etFaxingliang.getText().toString())) {
-                    Toast.makeText(mContext, "请输入易换币数量", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请输入易换券数量", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String substring =  tvDate.getText().toString().substring(0, 1);
-                presenter.ApplyRequest(etFaxingliang.getText().toString() ,substring);
+                if (tvDate.getText().toString().length()<=0){
+                    substring="1";
+                }else {
+                    substring = tvDate.getText().toString().substring(0, 1);
+                }
+                presenter.ApplyRequest(etFaxingliang.getText().toString() , substring);
                 break;
         }
     }
