@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseFragment;
 import com.easychange.admin.easychangemerchant.http.BaseResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.easychange.admin.easychangemerchant.p.SaoMaPresenter;
 import com.easychange.admin.easychangemerchant.utils.CacheUtils;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -108,12 +109,12 @@ public class QuanFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    public void bisao(BaseResponseBean responseBean) {
+    public void bisao(ResponseBean2 responseBean) {
 
     }
 
     @Override
-    public void quansao(BaseResponseBean responseBean) {
+    public void quansao(ResponseBean2 responseBean) {
 
     }
 }

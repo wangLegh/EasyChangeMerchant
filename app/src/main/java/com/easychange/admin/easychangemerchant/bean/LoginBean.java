@@ -34,6 +34,7 @@ public class LoginBean {
      */
     private int distance;
     private String city;
+    private String qrCode;
     private double latitude;
     private String businessName;
     private String pageSize;
@@ -60,6 +61,14 @@ public class LoginBean {
     private int circulation;
     private String category;
     private int carboniNtegral;
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
+    }
 
     public void setDistance(int distance) {
         this.distance = distance;

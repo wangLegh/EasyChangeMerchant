@@ -7,6 +7,7 @@ import com.easychange.admin.easychangemerchant.http.BaseResponseBean;
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.lzy.okgo.model.Response;
 
 public class SaoMaPresenter {
@@ -20,17 +21,17 @@ public class SaoMaPresenter {
     }
 
     public void getBiSaoData(int shopId, int residentId, int count) {
-        new HttpManager<ResponseBean<BaseResponseBean>>("merchantApp/verification", this)
+        new HttpManager<ResponseBean2>("merchantApp/verification", this)
                 .addParams("shopId", shopId)
                 .addParams("residentId", residentId)
                 .addParams("type", 2)
                 .addParams("count", count)
-                .postRequest(new DialogCallback<ResponseBean<BaseResponseBean>>(activity) {
+                .postRequest(new DialogCallback<ResponseBean2>(activity) {
                     @Override
-                    public void onSuccess(Response<ResponseBean<BaseResponseBean>> response) {
+                    public void onSuccess(Response<ResponseBean2> response) {
                         if (response.body().data != null) {
-                            if (response.body().code == 200)
-                                callBack.bisao(response.body().data);
+//                            if (response.body().code.equals("200"))
+//                                callBack.bisao(response.body().data);
                         }
                         Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                     }
@@ -38,16 +39,16 @@ public class SaoMaPresenter {
     }
 
     public void getQuanSaoData(int shopId, int code) {
-        new HttpManager<ResponseBean<BaseResponseBean>>("merchantApp/verification", this)
+        new HttpManager<ResponseBean2>("merchantApp/verification", this)
                 .addParams("shopId", shopId)
                 .addParams("code", code)
                 .addParams("type", 1)
-                .postRequest(new DialogCallback<ResponseBean<BaseResponseBean>>(activity) {
+                .postRequest(new DialogCallback<ResponseBean2>(activity) {
                     @Override
-                    public void onSuccess(Response<ResponseBean<BaseResponseBean>> response) {
+                    public void onSuccess(Response<ResponseBean2> response) {
                         if (response.body().data != null) {
-                            if (response.body().code == 200)
-                                callBack.quansao(response.body().data);
+//                            if (response.body().code.equals("200"))
+//                                callBack.quansao(response.body().data);
                         }
                         Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                     }
@@ -55,8 +56,8 @@ public class SaoMaPresenter {
     }
 
     public interface SaoMaCallBack {
-        void bisao(BaseResponseBean responseBean);
+        void bisao(ResponseBean2 responseBean);
 
-        void quansao(BaseResponseBean responseBean);
+        void quansao(ResponseBean2 responseBean);
     }
 }

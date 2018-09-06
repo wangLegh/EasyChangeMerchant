@@ -12,6 +12,7 @@ import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.bean.LoginBean;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.easychange.admin.easychangemerchant.utils.MyUtils;
 import com.easychange.admin.easychangemerchant.utils.SendSmsTimerUtils;
 
@@ -101,7 +102,7 @@ public class ForgetPwdActivity extends BaseActivity implements LoginPresenter.To
     }
 
     @Override
-    public void registShop(ResponseBean responseBean) {
+    public void registShop(ResponseBean2 responseBean) {
 
     }
 

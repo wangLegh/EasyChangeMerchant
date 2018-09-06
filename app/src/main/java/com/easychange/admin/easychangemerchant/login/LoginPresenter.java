@@ -31,24 +31,23 @@ public class LoginPresenter {
     public void getRegistInfo(String businessName, String legalPerson, String shopPhone, String code,
                               String category, String shopAddr, String telephone,
                               int turnover, int circulation, int deadline, String license) {
-        new HttpManager<ResponseBean<ResponseBean>>("merchantApp/applyForEnter?businessName=" + businessName
+        new HttpManager<ResponseBean2>("merchantApp/applyForEnter?businessName=" + businessName
                 + "&legalPerson=" + legalPerson + "&shopPhone=" + shopPhone + "&code=" + code + "&category=" + category
                 + "&shopAddr=" + shopAddr + "&telephone=" + telephone + "&turnover=" + turnover + "&circulation=" + circulation
                 + "&deadline=" + deadline + "&license=" + license
                 , this)
-                .postRequest(new DialogCallback<ResponseBean<ResponseBean>>(activity) {
+                .postRequest(new DialogCallback<ResponseBean2>(activity) {
                     @Override
-                    public void onSuccess(Response<ResponseBean<ResponseBean>> response) {
+                    public void onSuccess(Response<ResponseBean2> response) {
                         if (response.body().data != null) {
-                            if (response.body().code == 200)
-                                callBack.registShop(response.body().data);
+//                            if (response.body().code.equals("200"))
+//                                callBack.registShop(response.body().data);
                         }
                         Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
-                    public void onError(Response<ResponseBean<ResponseBean>> response) {
+                    public void onError(Response<ResponseBean2> response) {
                         super.onError(response);
                         Log.e("xxx", response.getException().getMessage());
                     }
@@ -136,7 +135,7 @@ public class LoginPresenter {
 
         void getRegistCode(ResponseBean responseBean);
 
-        void registShop(ResponseBean responseBean);
+        void registShop(ResponseBean2 responseBean);
 
         void getForgetPswCode(ResponseBean responseBean);
 

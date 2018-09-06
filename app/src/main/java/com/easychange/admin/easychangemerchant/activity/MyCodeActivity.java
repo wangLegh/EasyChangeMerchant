@@ -5,16 +5,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.utils.CacheUtils;
@@ -40,15 +50,29 @@ public class MyCodeActivity extends BaseActivity {
     private String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private static final int CODE_FOR_WRITE_PERMISSION = 1002;
     private Bitmap qrCode;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_code);
         ButterKnife.bind(this);
-        int id = CacheUtils.get("id");
-        qrCode = QRCode.createQRCode(id + "", MyUtils.dip2px(this, 150));
-        ivCode.setImageBitmap(qrCode);
+//        int id = CacheUtils.get("id");
+//        qrCode = QRCode.createQRCode(id + "", MyUtils.dip2px(this, 150));
+//        ivCode.setImageBitmap(qrCode);
+        String qrCode=CacheUtils.get("qrCode");
+        if (TextUtils.isEmpty(qrCode)){
+            tvSave.setClickable(false);
+            return;
+        }
+        Glide.with(this).load(qrCode).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                BitmapDrawable bd=(BitmapDrawable)resource;
+                bitmap = bd.getBitmap();
+                ivCode.setImageBitmap(bitmap);
+            }
+        });
     }
 
     @OnClick({R.id.iv_back, R.id.tv_save})
@@ -69,7 +93,7 @@ public class MyCodeActivity extends BaseActivity {
                 permission);
         if (hasWriteStoragePermission == PackageManager.PERMISSION_GRANTED) {
             //拥有权限，执行操作
-            if (saveImageToGallery(this, qrCode)) {
+            if (saveImageToGallery(this, bitmap)) {
                 Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
@@ -86,7 +110,7 @@ public class MyCodeActivity extends BaseActivity {
         if (requestCode == CODE_FOR_WRITE_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //用户同意，执行操作
-                if (saveImageToGallery(this, qrCode)) {
+                if (saveImageToGallery(this, bitmap)) {
                     Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
@@ -127,5 +151,4 @@ public class MyCodeActivity extends BaseActivity {
         }
         return false;
     }
-
 }

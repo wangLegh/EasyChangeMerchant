@@ -22,9 +22,11 @@ import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.base.BaseDialog;
 import com.easychange.admin.easychangemerchant.bean.AllShopTypeBean;
 import com.easychange.admin.easychangemerchant.bean.LoginBean;
+import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
 import com.easychange.admin.easychangemerchant.http.JsonCallback;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.easychange.admin.easychangemerchant.utils.MyUtils;
 import com.easychange.admin.easychangemerchant.utils.SendSmsTimerUtils;
 import com.luck.picture.lib.PictureSelector;
@@ -242,7 +244,7 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
     }
 
     @Override
-    public void registShop(ResponseBean responseBean) {
+    public void registShop(ResponseBean2 responseBean) {
         finish();
     }
 
@@ -425,7 +427,7 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
         OkGo.<String>post("http://39.106.220.142/resident/upload")
                 .tag(this)
                 .params("images", file)
-                .execute(new StringCallback() {
+                .execute(new DialogCallback<String>(RegistActivity.this) {
                     @Override
                     public void onSuccess(Response<String> response) {
                         String body = response.body();
@@ -441,6 +443,4 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
                     }
                 });
     }
-
-
 }
