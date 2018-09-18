@@ -35,6 +35,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/iv_shop_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="80dp"
+                    android:scaleType="fitXY"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/pai_she_icon_iv"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="商家简介："
+                        android:textColor="@color/textcolor"/>
+                    <EditText
+                        android:id="@+id/et_jianjie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="start"
+                        android:hint="请输入商家简介"
+                        android:minHeight="65dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/textcolorgray"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -319,25 +358,18 @@
                     android:background="@color/layout_bg"/>
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:padding="5dp">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
+                    android:layout_marginLeft="10dp"
                     android:text="商家地址："
                     android:textColor="@color/textcolor"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@color/layout_bg"/>
                 <EditText
                     android:id="@+id/et_company_address"
                     android:layout_width="match_parent"
@@ -345,13 +377,44 @@
                     android:background="@null"
                     android:gravity="start"
                     android:hint="请输入商家地址"
-                    android:minLines="3"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="10dp"
+                    android:padding="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/textcolorgray"
                     android:textSize="14sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+                <com.amap.api.maps2d.MapView
+                    android:id="@+id/mapview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="15dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="门店图片："
+                    android:textColor="@color/textcolor"/>
+                <com.easychange.admin.easychangemerchant.views.MyGridView
+                    android:id="@+id/mygridview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:verticalSpacing="3dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -369,6 +432,8 @@
                     android:id="@+id/iv_camera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="80dp"
+                    android:scaleType="fitXY"
                     android:layout_marginTop="15dp"
                     android:src="@drawable/pai_she_icon_iv"/>
             </LinearLayout>
