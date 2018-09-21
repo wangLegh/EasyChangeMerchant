@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.base.BaseDialog;
+import com.easychange.admin.easychangemerchant.login.LoginActivity;
+import com.easychange.admin.easychangemerchant.utils.CacheUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,14 +39,19 @@ public class AboutUsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
         ButterKnife.bind(this);
-        viewHeaderTitle.setText("关于我们");
+        viewHeaderTitle.setText("设置");
     }
 
-    @OnClick({R.id.view_header_back, R.id.layout_about_liuyan, R.id.layout_about_phone, R.id.layout_about_us})
+    @OnClick({R.id.view_header_back, R.id.layout_about_liuyan, R.id.layout_about_phone, R.id.layout_about_us,R.id.act_close_all})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_header_back:
                 finish();
+                break;
+            case R.id.act_close_all:
+                removeAllActivitys();
+                CacheUtils.removeAll();
+                startActivity(new Intent(mContext,LoginActivity.class));
                 break;
             case R.id.layout_about_liuyan:
                 startActivity(new Intent(mContext,LiuyanActivity.class));

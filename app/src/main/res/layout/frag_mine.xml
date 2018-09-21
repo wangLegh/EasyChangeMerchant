@@ -217,7 +217,7 @@
                 <TextView
                     android:drawablePadding="10dip"
                     android:gravity="center_vertical"
-                    android:text="关于我们"
+                    android:text="设置"
                     android:paddingLeft="15dip"
                     android:drawableLeft="@drawable/aboutus3x"
                     android:layout_width="0dip"
