@@ -42,6 +42,8 @@ public class AboutUsActivity extends BaseActivity {
         viewHeaderTitle.setText("设置");
     }
 
+
+
     @OnClick({R.id.view_header_back, R.id.layout_about_liuyan, R.id.layout_about_phone, R.id.layout_about_us,R.id.act_close_all})
     public void onClick(View view) {
         switch (view.getId()) {
