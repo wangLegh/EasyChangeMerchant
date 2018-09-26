@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -16,20 +15,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.utils.CacheUtils;
-import com.easychange.admin.easychangemerchant.utils.MyUtils;
-import com.easychange.admin.easychangemerchant.utils.QRCode;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,19 +54,23 @@ public class MyCodeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_code);
         ButterKnife.bind(this);
-//        int id = CacheUtils.get("id");
-//        qrCode = QRCode.createQRCode(id + "", MyUtils.dip2px(this, 150));
-//        ivCode.setImageBitmap(qrCode);
-        String qrCode=CacheUtils.get("qrCode");
-        if (TextUtils.isEmpty(qrCode)){
+        //        int id = CacheUtils.get("id");
+        //        qrCode = QRCode.createQRCode(id + "", MyUtils.dip2px(this, 150));
+        //        ivCode.setImageBitmap(qrCode);
+        String qrCode = CacheUtils.get("qrCode");
+        if (TextUtils.isEmpty(qrCode)) {
             tvSave.setClickable(false);
             return;
         }
-        Glide.with(this).load(qrCode).into(new SimpleTarget<Drawable>() {
+        RequestOptions options = new RequestOptions()
+                .override(400, 400);
+        Glide.with(this).load(qrCode).apply(options).into(new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                BitmapDrawable bd=(BitmapDrawable)resource;
+                BitmapDrawable bd = (BitmapDrawable) resource;
                 bitmap = bd.getBitmap();
+//                int byteCount = bitmap.getByteCount();
+//                Toast.makeText(MyCodeActivity.this, " "+byteCount, Toast.LENGTH_SHORT).show();
                 ivCode.setImageBitmap(bitmap);
             }
         });
@@ -127,12 +128,12 @@ public class MyCodeActivity extends BaseActivity {
     //保存图片到指定目录
     public boolean saveImageToGallery(Context context, Bitmap bmp) {
         //与系统有关的默认名称分隔符。 file.separator在Linux系统上，此字段的值为 '/'；在Windows 系统上，它为 '\'。
-        String galleryPath = context.getExternalFilesDir("易换云商家二维码") + File.separator + "易换云商家二维码";
+        String galleryPath = context.getExternalFilesDir("yihuan") + File.separator + "yihuan";
         File appDir = new File(galleryPath);
         if (!appDir.exists()) {
             appDir.mkdir();
         }
-        String fileName = System.currentTimeMillis() + ".jpg";
+        String fileName = System.currentTimeMillis() + ".png";
         File file = new File(appDir, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);

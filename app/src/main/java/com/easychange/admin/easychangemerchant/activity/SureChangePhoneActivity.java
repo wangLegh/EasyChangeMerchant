@@ -14,6 +14,7 @@ import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.bean.ChangePhoneBean;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.easychange.admin.easychangemerchant.p.ChangePhonePresenter;
 import com.easychange.admin.easychangemerchant.utils.MyUtils;
 import com.easychange.admin.easychangemerchant.views.CountDownUtils;
@@ -81,8 +82,8 @@ public class SureChangePhoneActivity extends BaseActivity implements ChangePhone
     }
 
     @Override
-    public void requestChangePhoneSuccess(Response<ResponseBean<ChangePhoneBean>> response) {
-        if (response.body().code == 200) {
+    public void requestChangePhoneSuccess(Response<ResponseBean2<ChangePhoneBean>> response) {
+        if (response.body().code.equals("200")) {
             Toast.makeText(mContext, response.body().msg, Toast.LENGTH_SHORT).show();
             Intent intent = getIntent();
             setResult(1,intent);
@@ -90,7 +91,6 @@ public class SureChangePhoneActivity extends BaseActivity implements ChangePhone
         } else {
             Toast.makeText(mContext, response.body().msg, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -100,7 +100,6 @@ public class SureChangePhoneActivity extends BaseActivity implements ChangePhone
 
     @Override
     public void requestGetCodeSuccess() {
-        Toast.makeText(mContext, "获取验证码成功", Toast.LENGTH_SHORT).show();
         countDownUtils.start();
     }
 

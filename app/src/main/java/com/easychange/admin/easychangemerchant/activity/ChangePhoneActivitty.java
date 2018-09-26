@@ -14,6 +14,7 @@ import com.easychange.admin.easychangemerchant.R;
 import com.easychange.admin.easychangemerchant.base.BaseActivity;
 import com.easychange.admin.easychangemerchant.bean.ChangePhoneBean;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.easychange.admin.easychangemerchant.p.ChangePhonePresenter;
 import com.easychange.admin.easychangemerchant.utils.MyUtils;
 import com.easychange.admin.easychangemerchant.views.CountDownUtils;
@@ -81,7 +82,7 @@ public class ChangePhoneActivitty extends BaseActivity implements ChangePhonePre
     }
 
     @Override
-    public void requestChangePhoneSuccess(Response<ResponseBean<ChangePhoneBean>> response) {
+    public void requestChangePhoneSuccess(Response<ResponseBean2<ChangePhoneBean>> response) {
 
     }
 
@@ -92,7 +93,6 @@ public class ChangePhoneActivitty extends BaseActivity implements ChangePhonePre
 
     @Override
     public void requestGetCodeSuccess() {
-        Toast.makeText(mContext, "获取验证码成功", Toast.LENGTH_SHORT).show();
         countDownUtils.start();
     }
 

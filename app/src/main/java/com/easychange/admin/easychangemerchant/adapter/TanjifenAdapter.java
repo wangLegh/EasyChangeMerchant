@@ -44,7 +44,7 @@ public class TanjifenAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
-            viewHolder.tv_tanjifen_duihuan.setText(datas.get(position).getSort()+"");
+            viewHolder.tv_tanjifen_duihuan.setText(datas.get(position).getSort()+datas.get(position).getName());
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

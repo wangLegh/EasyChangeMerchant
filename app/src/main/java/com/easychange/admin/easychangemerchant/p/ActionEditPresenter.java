@@ -7,6 +7,9 @@ import com.easychange.admin.easychangemerchant.http.HttpManager;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
 import com.lzy.okgo.model.Response;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * admin  2018/8/20 wan
  */
@@ -21,6 +24,11 @@ public class ActionEditPresenter {
     }
 
     public void setEditActionRequest(int id, String activityTitle, String beginTime, String endTime){
+        try {
+            activityTitle= URLEncoder.encode(activityTitle, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         new HttpManager<ResponseBean>("merchantApp/updateActivityDetail", this)
                 .addParams("id", id)
                 .addParams("activityTitle", activityTitle)

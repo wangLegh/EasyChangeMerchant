@@ -76,6 +76,10 @@ public class ActionEditActivity extends BaseActivity implements View.OnClickList
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
+                if (date2.getTime()< System.currentTimeMillis()){
+                    Toast.makeText(ActionEditActivity.this, "开始时间不能小于当前时间", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
                 tvStartTime.setText(format.format(date2));
             }

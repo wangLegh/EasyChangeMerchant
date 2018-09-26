@@ -167,6 +167,8 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
             @Override
             public void onMapClick(LatLng latLng) {
                 Intent intent = new Intent(RegistActivity.this, MyMapActivity.class);
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivityForResult(intent, 0);
             }
         });
@@ -174,7 +176,6 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
             checkPermission(permissions[i]);
         }
     }
-
 
     private void checkPermission(String permission) {
         //使用兼容库就无需判断系统版本
@@ -229,8 +230,8 @@ public class RegistActivity extends BaseActivity implements LoginPresenter.Token
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.getLatitude();//获取纬度
-                amapLocation.getLongitude();//获取经度
+                latitude=amapLocation.getLatitude();//获取纬度
+                longitude=amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
                 city = amapLocation.getCity();
             } else {

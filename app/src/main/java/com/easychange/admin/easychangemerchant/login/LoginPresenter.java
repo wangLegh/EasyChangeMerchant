@@ -11,6 +11,9 @@ import com.easychange.admin.easychangemerchant.http.ResponseBean;
 import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.lzy.okgo.model.Response;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by Administrator on 2018/7/5.
  */
@@ -30,21 +33,29 @@ public class LoginPresenter {
      */
     public void getRegistInfo(String businessName, String legalPerson, String shopPhone, String code,
                               String category, String shopAddr, String telephone,
-                              int turnover, int circulation, int deadline, String license,String situation,
-                              String image,String categorys,String city,double longitude,double latitude) {
+                              int turnover, int circulation, int deadline, String license, String situation,
+                              String image, String categorys, String city, double longitude, double latitude) {
+        try {
+            businessName= URLEncoder.encode(businessName, "UTF-8");
+            legalPerson= URLEncoder.encode(legalPerson, "UTF-8");
+            category= URLEncoder.encode(category, "UTF-8");
+            shopAddr= URLEncoder.encode(shopAddr, "UTF-8");
+            situation= URLEncoder.encode(situation, "UTF-8");
+            city= URLEncoder.encode(city, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         new HttpManager<ResponseBean>("merchantApp/applyForEnter?businessName=" + businessName
                 + "&legalPerson=" + legalPerson + "&shopPhone=" + shopPhone + "&code=" + code + "&category=" + category
                 + "&shopAddr=" + shopAddr + "&telephone=" + telephone + "&turnover=" + turnover + "&circulation=" + circulation
-                + "&deadline=" + deadline + "&license=" + license+"&situation="+situation+"&image="+image+"&categorys="+categorys
-                +"&city="+city+"&longitude="+longitude+"&latitude="+latitude
+                + "&deadline=" + deadline + "&license=" + license + "&situation=" + situation + "&image=" + image + "&categorys=" + categorys
+                + "&city=" + city + "&longitude=" + longitude + "&latitude=" + latitude
                 , this)
                 .postRequest(new DialogCallback<ResponseBean>(activity) {
                     @Override
                     public void onSuccess(Response<ResponseBean> response) {
-                        if (response.body().data != null) {
-                            if (response.body().code==200)
-                                callBack.registShop((ResponseBean) response.body().data);
-                        }
+                        if (response.body().code == 200)
+                            callBack.registShop((ResponseBean) response.body().data);
                         Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                     }
 

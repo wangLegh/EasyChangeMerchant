@@ -1,12 +1,14 @@
 package com.easychange.admin.easychangemerchant.p;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import com.easychange.admin.easychangemerchant.EasyApplication;
 import com.easychange.admin.easychangemerchant.bean.ChangePhoneBean;
 import com.easychange.admin.easychangemerchant.http.DialogCallback;
 import com.easychange.admin.easychangemerchant.http.HttpManager;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
+import com.easychange.admin.easychangemerchant.http.ResponseBean2;
 import com.lzy.okgo.model.Response;
 
 /**
@@ -24,18 +26,19 @@ public class ChangePhonePresenter {
 
     //更换手机号
     public void ChangePhoneRequest(String phone, String code) {
-        new HttpManager<ResponseBean<ChangePhoneBean>>("/merchantApp/updatePhone", this)
+        new HttpManager<ResponseBean2<ChangePhoneBean>>("/merchantApp/updatePhone", this)
                 .addParams("id", EasyApplication.getUserId())
                 .addParams("phone", phone)
                 .addParams("code", code)
-                .postRequest(new DialogCallback<ResponseBean<ChangePhoneBean>>(activity) {
+                .postRequest(new DialogCallback<ResponseBean2<ChangePhoneBean>>(activity) {
                     @Override
-                    public void onSuccess(Response<ResponseBean<ChangePhoneBean>> response) {
+                    public void onSuccess(Response<ResponseBean2<ChangePhoneBean>> response) {
                         callBack.requestChangePhoneSuccess(response);
+                        Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onError(Response<ResponseBean<ChangePhoneBean>> response) {
+                    public void onError(Response<ResponseBean2<ChangePhoneBean>> response) {
                         super.onError(response);
                         callBack.requestFail(response.getException().getMessage());
                     }
@@ -50,7 +53,7 @@ public class ChangePhonePresenter {
 
     * 获取验证码
     * */
-    public void GetCodeRequest( String phone, String type) {
+    public void GetCodeRequest(String phone, String type) {
         new HttpManager<ResponseBean>("/pc/myShop/nextAuthCode", this)
                 .addParams("id", EasyApplication.getUserId())
                 .addParams("phone", phone)
@@ -58,7 +61,10 @@ public class ChangePhonePresenter {
                 .getRequets(new DialogCallback<ResponseBean>(activity) {
                     @Override
                     public void onSuccess(Response<ResponseBean> response) {
-                        callBack.requestGetCodeSuccess();
+                        if (response.body().code == 200) {
+                            callBack.requestGetCodeSuccess();
+                        }
+                        Toast.makeText(activity, response.body().msg, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -71,7 +77,7 @@ public class ChangePhonePresenter {
     }
 
 
-    public void NextRequest( String code) {
+    public void NextRequest(String code) {
         new HttpManager<ResponseBean>("/pc/myShop/next", this)
                 .addParams("id", EasyApplication.getUserId())
                 .addParams("code", code)
@@ -92,7 +98,7 @@ public class ChangePhonePresenter {
 
     public interface ChangePhoneCallBack {
 
-        void requestChangePhoneSuccess(Response<ResponseBean<ChangePhoneBean>> response);
+        void requestChangePhoneSuccess(Response<ResponseBean2<ChangePhoneBean>> response);
 
         void requestFail(String message);
 

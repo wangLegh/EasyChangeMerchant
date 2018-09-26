@@ -3,7 +3,9 @@ package com.easychange.admin.easychangemerchant.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -69,6 +71,38 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         submit.setOnClickListener(this);
 
         createPresenter = new CreatePresenter(this, this);
+        initListener();
+    }
+
+    private void initListener() {
+        etMinNum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String min = etMinNum.getText().toString();
+                String max = etMaxNum.getText().toString();
+                if (!TextUtils.isEmpty(min)) {
+                    try {
+                        int x = Integer.parseInt(min);
+                        int y = Integer.parseInt(max);
+                        if (x > y) {
+                            Toast.makeText(CreateActivity.this, "减的数字一定要小于满的", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     private TextView tvActionTime;
@@ -130,6 +164,10 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
                 startTime = date2.getTime();
+                if (startTime < System.currentTimeMillis()) {
+                    Toast.makeText(CreateActivity.this, "开始时间不能小于当前时间", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
                 tvStartTime.setText(format.format(date2));
             }
@@ -155,10 +193,10 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
-                if (date2.getTime()>startTime){
+                if (date2.getTime() >= startTime) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
                     tvStopTime.setText(format.format(date2));
-                }else {
+                } else {
                     Toast.makeText(mContext, "结束时间应该在起始时间之后", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -210,14 +248,14 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
-                if (date2.getTime()>startSpecificTime){
+                if (date2.getTime() > startSpecificTime) {
                     SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                     tvSpecificStopTime.setText(format.format(date2));
-                }else {
+                } else {
                     Toast.makeText(mContext, "结束时间应该在起始时间之后", Toast.LENGTH_SHORT).show();
                 }
 
-//                tvSpecificStopTime.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                //                tvSpecificStopTime.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
             }
         })
                 .setType(TimePickerView.Type.HOURS_MINS)//默认全部显示
@@ -261,9 +299,9 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                         .hideSoftInputFromWindow(getCurrentFocus()
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
-                if (tvStartTime.getText().toString().equals("请选择")){
+                if (tvStartTime.getText().toString().equals("请选择")) {
                     Toast.makeText(mContext, "请选择起始时间", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     showStopTimeSelect();
                 }
                 break;
@@ -280,9 +318,9 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                         .hideSoftInputFromWindow(getCurrentFocus()
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
-                if (tvSpecificStartTime.getText().toString().equals("请输入具体开始时间")){
+                if (tvSpecificStartTime.getText().toString().equals("请输入具体开始时间")) {
                     Toast.makeText(mContext, "请输入具体开始时间", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     showSpecificStopTimeSelect();
                 }
 
@@ -319,6 +357,20 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "请设置满减", Toast.LENGTH_SHORT).show();
 
                 } else {
+                    String min = etMinNum.getText().toString();
+                    String max = etMaxNum.getText().toString();
+                    if (!TextUtils.isEmpty(min)) {
+                        try {
+                            int x = Integer.parseInt(min);
+                            int y = Integer.parseInt(max);
+                            if (x > y) {
+                                Toast.makeText(CreateActivity.this, "减的数字一定要小于满的", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                     //0工作日 1休息日 2不限
                     String actionTime = null;
                     if (TextUtils.equals(tvActionTime.getText().toString(), "工作日")) {
@@ -328,7 +380,6 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                     } else if (TextUtils.equals(tvActionTime.getText().toString(), "全部")) {
                         actionTime = "2";
                     }
-
                     createPresenter.setCreateAction(etCompanyName.getText().toString().trim(), etCoinNum.getText().toString(),
                             EasyApplication.getUserId(), etMaxNum.getText().toString(), etMinNum.getText().toString(),
                             etCouponNum.getText().toString(), tvStartTime.getText().toString().replace(".", "-"), tvStopTime.getText().toString().replace(".", "-")

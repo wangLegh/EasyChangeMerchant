@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -38,6 +39,8 @@ public class MyMapActivity extends BaseActivity implements AMapLocationListener 
     @BindView(R.id.iv_back)
     ImageView iv_back;
     private LatLng position;
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +54,43 @@ public class MyMapActivity extends BaseActivity implements AMapLocationListener 
         //初始化地图控制器对象
         aMap = mMapView.getMap();
         initLocation();
+        initMarker();
+        initListener();
+        Toast.makeText(this, "长按拖动红色控件可选择位置~", Toast.LENGTH_SHORT).show();
+    }
+
+    private void initListener() {
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent();
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+                setResult(1001, intent);
+                finish();
             }
         });
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("latitude", position.latitude);
-                intent.putExtra("longitude", position.longitude);
-                setResult(1001, intent);
                 finish();
             }
         });
+    }
+
+    private void initMarker() {
+        latitude = getIntent().getDoubleExtra("latitude",0);//获取纬度
+        longitude = getIntent().getDoubleExtra("longitude",0);//获取经度
+        LatLng latLng = new LatLng(latitude, longitude);
+        MarkerOptions markerOption = new MarkerOptions();
+        markerOption.position(latLng);
+        markerOption.title(city).snippet("当前位置");
+        markerOption.draggable(true);//设置Marker可拖动
+        markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                .decodeResource(getResources(), R.drawable.location_marker)));
+        aMap.addMarker(markerOption);
+        // 绑定marker拖拽事件
+        aMap.setOnMarkerDragListener(markerDragListener);
     }
 
     private void initLocation() {
@@ -95,20 +119,8 @@ public class MyMapActivity extends BaseActivity implements AMapLocationListener 
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.getLatitude();//获取纬度
-                amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
                 city = amapLocation.getCity();
-                LatLng latLng = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
-                MarkerOptions markerOption = new MarkerOptions();
-                markerOption.position(latLng);
-                markerOption.title(city).snippet("当前位置");
-                markerOption.draggable(true);//设置Marker可拖动
-                markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                        .decodeResource(getResources(), R.drawable.location_marker)));
-                aMap.addMarker(markerOption);
-                // 绑定marker拖拽事件
-                aMap.setOnMarkerDragListener(markerDragListener);
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError", "location Error, ErrCode:"
@@ -137,6 +149,8 @@ public class MyMapActivity extends BaseActivity implements AMapLocationListener 
         public void onMarkerDragEnd(Marker arg0) {
             // TODO Auto-generated method stub
             position = arg0.getPosition();
+            latitude = position.latitude;
+            longitude = position.longitude;
         }
 
         // 在marker拖动过程中回调此方法, 这个marker的位置可以通过getPosition()方法返回。

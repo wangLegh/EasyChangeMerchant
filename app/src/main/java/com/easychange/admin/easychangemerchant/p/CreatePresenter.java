@@ -9,6 +9,9 @@ import com.easychange.admin.easychangemerchant.http.HttpManager;
 import com.easychange.admin.easychangemerchant.http.ResponseBean;
 import com.lzy.okgo.model.Response;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * admin  2018/8/20 wan
  */
@@ -35,7 +38,14 @@ public class CreatePresenter {
      * timeLimit 	是 	string 	每日限时
      * activityTime 	是 	string 	活动日期（0工作日 1休息日 2不限）
      */
-    public void setCreateAction(String activityTitle, String price, String shopId, String full, String sub, String count, String beginTime, String endTime, String timeLimit, String activityTime) {
+    public void setCreateAction(String activityTitle, String price, String shopId, String full,
+                                String sub, String count, String beginTime, String endTime,
+                                String timeLimit, String activityTime) {
+        try {
+            activityTitle= URLEncoder.encode(activityTitle, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         new HttpManager<ResponseBean<Void>>("merchantApp/createActivity", this)
                 .addParams("activityTitle", activityTitle)
                 .addParams("price", price)
