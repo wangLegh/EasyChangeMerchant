@@ -25,8 +25,7 @@ public class LiuyanPresenter {
     public void getLiuyanList( String content) {
         new HttpManager<ResponseBean>("/merchantApp/addFeedback", this)
                 .addParamsJson("userId", EasyApplication.getUserId())
-                .addParamsJson("title", "")
-                .addParamsJson("pageSize", content)
+                .addParamsJson("content", content)
                 .createPostJsonObject()
                 .postRequestJson(new DialogCallback<ResponseBean>(activity) {
                     @Override
